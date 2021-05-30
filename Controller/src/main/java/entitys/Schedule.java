@@ -21,11 +21,11 @@ public class Schedule {
         for (int i=0; i<7; ++i) {
             days += "9:00 21:00 " + cnt++ + ";";
         }
-        System.out.println("create Schedule №" + id);
+        //System.out.println("create Schedule №" + id);
     }
     public Schedule(String _days) {
         days = _days;
-        System.out.println("create Schedule №" + id);
+        //System.out.println("create Schedule №" + id);
     }
     // методы
     public int getId() { return id; }

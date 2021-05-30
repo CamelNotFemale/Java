@@ -22,6 +22,9 @@ public class Route {
     private Schedule schedule; // расписание движения по дням недели
     @OneToMany(mappedBy = "route", fetch = FetchType.EAGER, orphanRemoval = false)
     private List<Bus> buses; // список автобусов на маршруте
+    @OneToOne(optional = true, cascade = CascadeType.ALL)
+    @JoinColumn(name = "violation_id")
+    private Violation violation; // нарушение
     private static List<Route> routes = new ArrayList<>(); // список всех маршрутов в единственном виде
     private static int cnt = 1;
     // конструктор(ы)
@@ -32,7 +35,8 @@ public class Route {
         buses = new ArrayList<>();
         schedule = new Schedule();
         Route.routes.add(this); // добавил новый созданный маршрут к списку всех
-        System.out.println("create Route №" + number + " " + start + "->" + finish);
+        violation = null;
+        //System.out.println("create Route №" + number + " " + start + "->" + finish);
     }
     public Route(int _num, String _start, String _finish) {
         cnt++;
@@ -42,7 +46,8 @@ public class Route {
         buses = new ArrayList<>();
         schedule = new Schedule();
         Route.routes.add(this); // добавил новый созданный маршрут к списку всех
-        System.out.println("create Route №" + number + " " + start + "->" + finish);
+        violation = null;
+        //System.out.println("create Route №" + number + " " + start + "->" + finish);
     }
     public Route(int _num, String _start, String _finish, String _schedule) {
         cnt++;
@@ -52,7 +57,8 @@ public class Route {
         buses = new ArrayList<>();
         schedule = new Schedule(_schedule);
         Route.routes.add(this); // добавил новый созданный маршрут к списку всех
-        System.out.println("create Route №" + number + " " + start + "->" + finish);
+        violation = null;
+        //System.out.println("create Route №" + number + " " + start + "->" + finish);
     }
     // методы
     public int getId() { return id; }
@@ -69,12 +75,15 @@ public class Route {
     public List<Bus> getBuses() {
         return buses;
     }
+    public Violation getViolation() { return violation; }
+
     public void setNumber(int _number) { number = _number; }
     public void setStart(String _start) { start = _start; }
     public void setFinish(String _finish) { finish = _finish; }
     public void setSchedule(String _schedule) {
             schedule = new Schedule(_schedule);
         }
+    public void setViolation(Violation _violation) { violation = _violation; }
     boolean addBus(Bus _bus) {
         if (_bus != null) {
             buses.add(_bus);
@@ -119,7 +128,8 @@ public class Route {
         return Integer.toString(id) + " " + Integer.toString(number) + " " + start + " " + finish;
     }
     public String[] toTableFormat() {
-        String[] res = new String[] {String.valueOf(id), String.valueOf(number), start, finish, schedule.getDays()};
+        String[] res = new String[] {String.valueOf(id), String.valueOf(number), start, finish, schedule.getDays(), "Ок"};
+        if (violation != null) res[5] = violation.getDescription();
         return res;
     }
 }

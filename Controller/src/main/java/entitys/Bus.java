@@ -20,22 +20,27 @@ public class Bus {
     @ManyToOne(optional = true, cascade = CascadeType.ALL)
     @JoinColumn(name = "route_id")
     private Route route; // ссылка на маршрут
+    @OneToOne(optional = true, cascade = CascadeType.ALL)
+    @JoinColumn(name = "violation_id")
+    private Violation violation; // нарушение
     private static int cnt = 1;
     // конструктор(ы)
     public Bus() {
         registr = "AAA" + cnt++;
         capacity = 48;
         driver = null;
-        //route = null;
-        System.out.println("create Bus №" + registr);
+        route = null;
+        violation = null;
+        //System.out.println("create Bus №" + registr);
     }
     public Bus(String _reg, int _capacity) {
         cnt++;
         registr = _reg;
         capacity = _capacity;
         driver = null;
-        //route = null;
-        System.out.println("create Bus №" + registr);
+        route = null;
+        violation = null;
+        //System.out.println("create Bus №" + registr);
     }
     // методы
     public int getId() { return id; }
@@ -43,6 +48,7 @@ public class Bus {
     public int getCapacity() { return capacity; }
     public Driver getDriver() { return driver; }
     public Route getRoute() { return route; }
+    public Violation getViolation() { return violation; }
     public boolean setRegistr(String reg_) {
         if (reg_.length()>0 && reg_.length()<7) {
             registr = reg_; return true;
@@ -100,10 +106,13 @@ public class Bus {
             return false;
         }
     }
+    public void setViolation(Violation _violation) { violation = _violation; }
+
     public String[] toTableFormat() {
-        String[] res = new String[] {String.valueOf(id), registr, String.valueOf(capacity), "Отсутствует", "Отсутствует"};;
+        String[] res = new String[] {String.valueOf(id), registr, String.valueOf(capacity), "Отсутствует", "Отсутствует", "Ок"};;
         if (driver != null) res[3] = driver.getName();
         if (route != null) res[4] = "№" + route.getNumber() + " " + route.getStart() + " - " + route.getFinish();
+        if (violation != null) res[5] = violation.getDescription();
         return res;
     }
 }

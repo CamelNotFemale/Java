@@ -1,9 +1,6 @@
 package app;
 
-import entitys.Bus;
-import entitys.Days;
-import entitys.Driver;
-import entitys.Route;
+import entitys.*;
 import utils.PDFExporter;
 import utils.ValidationError;
 import utils.WritingError;
@@ -17,13 +14,14 @@ import java.awt.*;
 import java.awt.event.*;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import static javax.swing.WindowConstants.*;
 
 public class App {
-    private EntityManagerFactory emf = Persistence.createEntityManagerFactory("test_persistence");
-    private EntityManager em = emf.createEntityManager();
+    private static final EntityManagerFactory emf = Persistence.createEntityManagerFactory("test_persistence");
+    private static final EntityManager em = emf.createEntityManager();
     // Объявления графических компонентов
     private JFrame App;
     private DefaultTableModel model;
@@ -39,6 +37,7 @@ public class App {
     private JComboBox author;
     private JTextField bookName;
     private JButton report;
+
     public void show() {
 // Создание окна
         App = new JFrame("Диспетчерская");
@@ -141,25 +140,25 @@ public class App {
         // заполнение даными
         switch (select) {
             case ("Автобусы"):
-                columns = new String[] {"ID", "Номер", "Вместимость", "Водитель", "Маршрут"};
+                columns = new String[] {"ID", "Номер", "Вместимость", "Водитель", "Маршрут", "Состояние"};
                 List<Bus> busList = em.createQuery("SELECT b FROM Bus b").getResultList();
-                data = new String[busList.size()][5];
+                data = new String[busList.size()][columns.length];
                 for (int i = 0; i < busList.size(); i++) {
                     data[i] = busList.get(i).toTableFormat();
                 }
                 break;
             case ("Водители"):
-                columns = new String[] {"ID", "ФИО", "Возраст", "Опыт", "Зарплата"};
+                columns = new String[] {"ID", "ФИО", "Возраст", "Опыт", "Зарплата", "Состояние"};
                 List<Driver> driverList = em.createQuery("SELECT d FROM Driver d").getResultList();
-                data = new String[driverList.size()][5];
+                data = new String[driverList.size()][columns.length];
                 for (int i = 0; i<driverList.size(); i++) {
                     data[i] = driverList.get(i).toTableFormat();
                 }
                 break;
             case ("Маршруты"):
-                columns = new String[] {"ID", "№", "Откуда", "Куда", "Расписание"};
+                columns = new String[] {"ID", "№", "Откуда", "Куда", "Расписание", "Состояние"};
                 List<Route> routeList = em.createQuery("SELECT r FROM Route r").getResultList();
-                data = new String[routeList.size()][5];
+                data = new String[routeList.size()][columns.length];
                 for (int i = 0; i<routeList.size(); i++) {
                     data[i] = routeList.get(i).toTableFormat();
                 }
@@ -173,7 +172,7 @@ public class App {
         };
         table = new JTable(model);
         // настройка отрисовки таблицы
-        table.setDefaultRenderer(Object.class, new ViolationTableCellRender(tableSelect.getSelectedIndex()));
+        table.setDefaultRenderer(Object.class, new ViolationTableCellRender(em, tableSelect.getSelectedIndex()));
         // Добавление попап меню для таблицы
         table.setComponentPopupMenu(new TablePopupMenu(table, (String)tableSelect.getSelectedItem()));
         // Добавление упорядочивания в таблице
@@ -702,5 +701,69 @@ public class App {
                     "выделите соответствующую строку!</i>", "Ошибка Удаления", JOptionPane.ERROR_MESSAGE);
             return false;
         }
+    }
+    // фиксация нарушений
+    protected static void fixABusViolation(JTable table, int ID, String violation_description) {
+        if (!em.getTransaction().isActive()) em.getTransaction().begin();
+
+        Bus model = em.find(Bus.class, ID);
+        Violation violation = null;
+        Violation fix = null;
+        if (model.getViolation() != null) {
+            fix = em.find(Violation.class, model.getViolation().getId());
+            fix.setFixDate(new Date());
+            violation_description = "";
+        }
+        if (violation_description.length() > 0)
+            violation = new Violation(violation_description + ": " + model.getRegistr());
+        model.setViolation(violation);
+
+        em.getTransaction().commit();
+        // обновляем данные в таблице приложения
+        DefaultTableModel dtm = ((DefaultTableModel) table.getModel());
+        dtm.setValueAt(violation_description.length() > 0 ? violation_description : "Ок", table.getSelectedRow(), table.getColumnCount()-1);
+        dtm.fireTableDataChanged();
+    }
+    protected static void fixADriverViolation(JTable table, int ID, String violation_description) {
+        if (!em.getTransaction().isActive()) em.getTransaction().begin();
+
+        Driver model = em.find(Driver.class, ID);
+        Violation violation = null;
+        Violation fix = null;
+        if (model.getViolation() != null) {
+            fix = em.find(Violation.class, model.getViolation().getId());
+            fix.setFixDate(new Date());
+            violation_description = "";
+        }
+        if (violation_description.length() > 0)
+            violation = new Violation(violation_description + ": " + model.getName());
+        model.setViolation(violation);
+
+        em.getTransaction().commit();
+        // обновляем данные в таблице приложения
+        DefaultTableModel dtm = ((DefaultTableModel) table.getModel());
+        dtm.setValueAt(violation_description.length() > 0 ? violation_description : "Ок", table.getSelectedRow(), table.getColumnCount()-1);
+        dtm.fireTableDataChanged();
+    }
+    protected static void fixARouteViolation(JTable table, int ID, String violation_description) {
+        if (!em.getTransaction().isActive()) em.getTransaction().begin();
+
+        Route model = em.find(Route.class, ID);
+        Violation violation = null;
+        Violation fix = null;
+        if (model.getViolation() != null) {
+            fix = em.find(Violation.class, model.getViolation().getId());
+            fix.setFixDate(new Date());
+            violation_description = "";
+        }
+        if (violation_description.length() > 0)
+            violation = new Violation(violation_description + ": №" + model.getNumber());
+        model.setViolation(violation);
+
+        em.getTransaction().commit();
+        // обновляем данные в таблице приложения
+        DefaultTableModel dtm = ((DefaultTableModel) table.getModel());
+        dtm.setValueAt(violation_description.length() > 0 ? violation_description : "Ок", table.getSelectedRow(), table.getColumnCount()-1);
+        dtm.fireTableDataChanged();
     }
 }

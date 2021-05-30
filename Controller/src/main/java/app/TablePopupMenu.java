@@ -82,8 +82,18 @@ public class TablePopupMenu extends JPopupMenu {
                 problem.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        //em.find(Bus.class, ID);
-                        new Violation(new Bus(), problem.getText());
+                        // вызываем фиксацию нарушения
+                        switch (select) {
+                            case "Автобусы":
+                                App.fixABusViolation(table, Integer.parseInt((String) table.getValueAt(table.getSelectedRow(), 0)), problem.getText());
+                                break;
+                            case "Водители":
+                                App.fixADriverViolation(table, Integer.parseInt((String) table.getValueAt(table.getSelectedRow(), 0)), problem.getText());
+                                break;
+                            case "Маршруты":
+                                App.fixARouteViolation(table, Integer.parseInt((String) table.getValueAt(table.getSelectedRow(), 0)), problem.getText());
+                                break;
+                        }
                     }
                 });
             }

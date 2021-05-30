@@ -22,6 +22,9 @@ public class Driver {
     private int salary;
     @OneToOne(optional = true, mappedBy = "driver")
     private Bus bus; // какой автобус водит
+    @OneToOne(optional = true, cascade = CascadeType.ALL)
+    @JoinColumn(name = "violation_id")
+    private Violation violation; // нарушение
     private static ArrayList<Driver> drivers = new ArrayList<>(); // список всех водителей в единственном виде
     private static int cnt = 1;
     // конструктор(ы)
@@ -32,7 +35,8 @@ public class Driver {
         setSalary();
         bus = null;
         drivers.add(this);
-        System.out.println("create Driver " + name);
+        violation = null;
+        //System.out.println("create Driver " + name);
     }
     public Driver(String _name, int _age, int _exp) {
         cnt++;
@@ -42,7 +46,8 @@ public class Driver {
         setSalary();
         bus = null;
         drivers.add(this);
-        System.out.println("create Driver " + name);
+        violation = null;
+        //System.out.println("create Driver " + name);
     }
     // методы
     public int getId() { return id; }
@@ -61,6 +66,7 @@ public class Driver {
     public Bus getBus() {
         return bus;
     }
+    public Violation getViolation() { return violation; }
 
     public void setName(String new_name) { name = new_name; }
     private void setSalary() { if (exp<10) salary=salary_base*(10+exp)/10; else salary=salary_base*2; }
@@ -74,6 +80,7 @@ public class Driver {
         exp = new_exp;
         setSalary();
     }
+    public void setViolation(Violation _violation) { violation = _violation; }
 
     boolean chooseBus(Bus _bus) {
         bus = _bus;
@@ -90,7 +97,8 @@ public class Driver {
         }
     }
     public String[] toTableFormat() {
-        String[] res = new String[] {String.valueOf(id), name, String.valueOf(age), String.valueOf(exp), String.valueOf(salary)};
+        String[] res = new String[] {String.valueOf(id), name, String.valueOf(age), String.valueOf(exp), String.valueOf(salary), "Ок"};
+        if (violation != null) res[5] = violation.getDescription();
         return res;
     }
 }
