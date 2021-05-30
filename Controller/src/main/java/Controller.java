@@ -1,6 +1,5 @@
-import com.leti.*;
-
-import javax.persistence.*;
+import entitys.*;
+import app.*;
 
 public class Controller {
     public static void main(String[] args) {
