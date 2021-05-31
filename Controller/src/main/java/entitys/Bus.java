@@ -49,33 +49,33 @@ public class Bus {
     public Driver getDriver() { return driver; }
     public Route getRoute() { return route; }
     public Violation getViolation() { return violation; }
+    // сеттеры
     public boolean setRegistr(String reg_) {
-        if (reg_.length()>0 && reg_.length()<7) {
+        if (reg_.length()>0 && reg_.length()<7 && Character.isLetter(reg_.charAt(0))) {
             registr = reg_; return true;
         }
         else return false;
     }
     public boolean setCapacity(int cap_) {
-        if (capacity>0) {
+        if (cap_ > 0) {
             capacity = cap_;
             return true;
         }
         else return false;
     }
-
     public boolean hireToDriver(Driver _driver) {
         if (_driver.getBus() != null) // если водитель работает на другом автобусе
             _driver.getBus().fireToDriver(); // то уволим его с того автобуса
         if (driver != null) // если у автобуса уже есть водитель
             this.fireToDriver();
         driver = _driver;
-        System.out.println("hire " + driver.getName() + " on " + this.getRegistr()); // удалить потом
+        //System.out.println("hire " + driver.getName() + " on " + this.getRegistr()); // удалить потом
         return driver.chooseBus(this);
     }
     public boolean fireToDriver() {
         if (driver != null) {
             driver.chooseBus(null);
-            System.out.println("fire " + driver.getName() + " from " + this.getRegistr()); // удалить потом
+            //System.out.println("fire " + driver.getName() + " from " + this.getRegistr()); // удалить потом
             driver = null;
             if (route != null) {
                 route.deleteBus(this);
@@ -87,7 +87,7 @@ public class Bus {
     }
     public boolean chooseRoute(Route _route) {
         if (_route == null) {
-            System.out.println("delete from path №" + route.getNumber() + " bus " + this.getRegistr()); // удалить потом
+            //System.out.println("delete from path №" + route.getNumber() + " bus " + this.getRegistr()); // удалить потом
             if (route != null) {
                 route.deleteBus(this);
             }
@@ -100,14 +100,25 @@ public class Bus {
                     route.deleteBus(this);
                 }
                 route = _route;
-                System.out.println("choosen path №" + route.getNumber() + " for " + this.getRegistr()); // удалить потом
+                //System.out.println("choosen path №" + route.getNumber() + " for " + this.getRegistr()); // удалить потом
                 return route.addBus(this);
             }
             return false;
         }
     }
-    public void setViolation(Violation _violation) { violation = _violation; }
-
+    public void setViolation(Violation _violation) {
+        violation = _violation;
+        // если замечено нарушение
+        if (violation != null) {
+            if (driver != null) {
+                fireToDriver();
+            }
+            if (route != null) {
+                chooseRoute(null);
+            }
+        }
+    }
+    // методы
     public String[] toTableFormat() {
         String[] res = new String[] {String.valueOf(id), registr, String.valueOf(capacity), "Отсутствует", "Отсутствует", "Ок"};;
         if (driver != null) res[3] = driver.getName();

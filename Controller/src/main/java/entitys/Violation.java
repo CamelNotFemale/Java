@@ -17,18 +17,18 @@ public class Violation {
     private Date datetime; // время нарушения
     @Column(name="fixdatetime")
     private Date fixdatetime; // время нарушения
-
+    // конструкторы
     public Violation(String violation_descript) {
         description = violation_descript;
         datetime = new Date();
-        System.out.println("Проблемка " + ": " + description);
+        //System.out.println("Проблемка " + ": " + description);
     }
     public Violation() {
         description = "Нераспознанная ошибка";
         datetime = new Date();
-        System.out.println("Проблемка " + ": " + description);
+        //System.out.println("Проблемка " + ": " + description);
     }
-
+    // геттеры
     public int getId() {
         return id;
     }
@@ -38,7 +38,10 @@ public class Violation {
     public Date getDate() {
         return datetime;
     }
-
+    public Date getFixDate() {
+        return fixdatetime;
+    }
+    // сеттеры
     public void setDescription(String _description) {
         description = _description;
     }

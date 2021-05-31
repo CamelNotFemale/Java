@@ -714,8 +714,10 @@ public class App {
             fix.setFixDate(new Date());
             violation_description = "";
         }
-        if (violation_description.length() > 0)
-            violation = new Violation(violation_description + ": " + model.getRegistr());
+        if (violation_description.length() > 0) {
+            violation_description = violation_description + ": " + model.getRegistr();
+            violation = new Violation(violation_description);
+        }
         model.setViolation(violation);
 
         em.getTransaction().commit();
@@ -735,8 +737,10 @@ public class App {
             fix.setFixDate(new Date());
             violation_description = "";
         }
-        if (violation_description.length() > 0)
-            violation = new Violation(violation_description + ": " + model.getName());
+        if (violation_description.length() > 0) {
+            violation_description = violation_description + ": " + model.getName();
+            violation = new Violation(violation_description);
+        }
         model.setViolation(violation);
 
         em.getTransaction().commit();
@@ -756,8 +760,10 @@ public class App {
             fix.setFixDate(new Date());
             violation_description = "";
         }
-        if (violation_description.length() > 0)
-            violation = new Violation(violation_description + ": №" + model.getNumber());
+        if (violation_description.length() > 0) {
+            violation_description = violation_description + ": №" + model.getNumber();
+            violation = new Violation(violation_description);
+        }
         model.setViolation(violation);
 
         em.getTransaction().commit();

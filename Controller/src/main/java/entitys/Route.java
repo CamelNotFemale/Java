@@ -60,7 +60,7 @@ public class Route {
         violation = null;
         //System.out.println("create Route №" + number + " " + start + "->" + finish);
     }
-    // методы
+    // геттеры
     public int getId() { return id; }
     public int getNumber() {
         return number;
@@ -76,25 +76,32 @@ public class Route {
         return buses;
     }
     public Violation getViolation() { return violation; }
-
+    // сеттеры
     public void setNumber(int _number) { number = _number; }
     public void setStart(String _start) { start = _start; }
     public void setFinish(String _finish) { finish = _finish; }
     public void setSchedule(String _schedule) {
             schedule = new Schedule(_schedule);
         }
-    public void setViolation(Violation _violation) { violation = _violation; }
+    public void setViolation(Violation _violation) {
+        violation = _violation;
+        // если замечено нарушение
+        if (violation != null) {
+            exclude();
+        }
+    }
+    // методы
     boolean addBus(Bus _bus) {
         if (_bus != null) {
             buses.add(_bus);
-            System.out.println("add " + _bus.getRegistr() + " for path №" + this.getNumber()); // удалить потом
+            //System.out.println("add " + _bus.getRegistr() + " for path №" + this.getNumber()); // удалить потом
             return true;
         }
         else return false;
     }
     boolean deleteBus(Bus _bus) {
         if (_bus != null) {
-            System.out.println("delete " + _bus.getRegistr() + " from path №" + this.getNumber()); // удалить потом
+            //System.out.println("delete " + _bus.getRegistr() + " from path №" + this.getNumber()); // удалить потом
             return buses.remove(_bus);
         }
         else return false;
@@ -104,7 +111,7 @@ public class Route {
             while (buses.size() != 0) {
                 buses.get(0).chooseRoute(null);
             }
-            System.out.println("exclude path №" + this.getNumber() + " from work"); // удалить потом
+            //System.out.println("exclude path №" + this.getNumber() + " from work"); // удалить потом
             return true;
         }
         else return false;

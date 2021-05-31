@@ -61,12 +61,12 @@ public class TablePopupMenu extends JPopupMenu {
                 this.add(viewSchedule);
                 break;
         }
-
         // добавление пунктов "Нарушений" в PopupMenu
         ArrayList<JMenuItem> problems_list = new ArrayList<>();
         switch (select) {
             case "Автобусы":
                 problems_list.add(new JMenuItem("Поломка"));
+                problems_list.add(new JMenuItem("ДТП"));
                 break;
             case "Водители":
                 problems_list.add(new JMenuItem("Прогул"));
@@ -74,6 +74,7 @@ public class TablePopupMenu extends JPopupMenu {
                 break;
             case "Маршруты":
                 problems_list.add(new JMenuItem("Ремонт"));
+                problems_list.add(new JMenuItem("Крупное ДТП"));
                 break;
         }
         if (problems_list.size() > 0) {

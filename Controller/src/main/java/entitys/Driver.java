@@ -49,7 +49,7 @@ public class Driver {
         violation = null;
         //System.out.println("create Driver " + name);
     }
-    // методы
+    // геттеры
     public int getId() { return id; }
     public String getName() {
         return name;
@@ -67,7 +67,7 @@ public class Driver {
         return bus;
     }
     public Violation getViolation() { return violation; }
-
+    // сеттеры
     public void setName(String new_name) { name = new_name; }
     private void setSalary() { if (exp<10) salary=salary_base*(10+exp)/10; else salary=salary_base*2; }
     public static void setSalaryBase(int new_salary) {
@@ -80,12 +80,20 @@ public class Driver {
         exp = new_exp;
         setSalary();
     }
-    public void setViolation(Violation _violation) { violation = _violation; }
-
+    public void setViolation(Violation _violation) {
+        violation = _violation;
+        // если замечено нарушение
+        if (violation != null) {
+            if (bus != null) {
+                bus.fireToDriver();
+            }
+        }
+    }
     boolean chooseBus(Bus _bus) {
         bus = _bus;
         return true;
     }
+    // методы
     public static void printList() {
         System.out.println("List of drivers:");
         for (Driver driver: drivers) {
