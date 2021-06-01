@@ -1,13 +1,11 @@
 package app;
 
 import entitys.*;
-import utils.PDFExporter;
 import utils.ValidationError;
 import utils.WritingError;
 
 import javax.persistence.*;
 import javax.swing.*;
-import javax.swing.event.*;
 import javax.swing.table.*;
 import javax.swing.text.*;
 import java.awt.*;
@@ -34,8 +32,6 @@ public class App {
     private JToolBar toolBar;
     private JScrollPane scroll;
     private JTable table;
-    private JComboBox author;
-    private JTextField bookName;
     private JButton report;
 
     public void show() {
@@ -47,10 +43,10 @@ public class App {
 // Создание кнопок и прикрепление иконок
         tableSelect = new JComboBox(new String[]{"Автобусы", "Водители",
                 "Маршруты"});
-        add = new JButton("Add"); // new ImageIcon("./img/save.png")
-        edit = new JButton("Edit"); // new ImageIcon("./img/save.png")
-        remove = new JButton("Remove"); // new ImageIcon("./img/save.png")
-        export = new JButton("Export"); // new ImageIcon("./img/save.png")
+        add = new JButton(new ImageIcon("./src/main/resources/img/add.png")); //new ImageIcon("./src/main/resources/img/add.png")
+        edit = new JButton(new ImageIcon("./src/main/resources/img/edit.png")); //new ImageIcon("./src/main/resources/img/edit.png")
+        remove = new JButton(new ImageIcon("./src/main/resources/img/delete.png")); //new ImageIcon("./src/main/resources/img/delete.png")
+        export = new JButton(new ImageIcon("./src/main/resources/img/export.png")); //new ImageIcon("./src/main/resources/img/export.png")
 
 // Добавление слушателей
         ActionListener actionSelect = new ActionListener() {
@@ -61,36 +57,23 @@ public class App {
             }
         };
         tableSelect.addActionListener(actionSelect);
-        ActionListener actionPressButton = new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                switch (e.getActionCommand()) {
-                    case ("Add"):
-                        try {
-                            createTableItem();
-                        } catch (ParseException parseException) {
-                            parseException.printStackTrace();
-                        }
-                        break;
-                    case ("Edit"):
-                        try {
-                            editTableItem();
-                        } catch (ParseException parseException) {
-                            parseException.printStackTrace();
-                        }
-                        break;
-                    case ("Remove"):
-                        removeTableItem();
-                        break;
-                    case ("Export"):
-                        new PDFExporter(table);
-                        break;
-                }
+
+        add.addActionListener(e -> {
+            try {
+                createTableItem();
+            } catch (ParseException parseException) {
+                parseException.printStackTrace();
             }
-        };
-        add.addActionListener(actionPressButton);
-        edit.addActionListener(actionPressButton);
-        remove.addActionListener(actionPressButton);
-        export.addActionListener(actionPressButton);
+        });
+        edit.addActionListener(e -> {
+            try {
+                editTableItem();
+            } catch (ParseException parseException) {
+                parseException.printStackTrace();
+            }
+        });
+        remove.addActionListener(e -> removeTableItem());
+        export.addActionListener(e -> new PDFExporter(table));
 
 // Настройка подсказок для кнопок
         tableSelect.setToolTipText("Выберите таблицу");
@@ -199,8 +182,8 @@ public class App {
                 JFormattedTextField capacity = new JFormattedTextField(capFormatter);
 
                 JLabel driverLabel = new JLabel("Доступные водители:");
-                List<String> driverNameList = em.createQuery("SELECT name FROM Driver d").getResultList();
-                List<Integer> driverIDList = em.createQuery("SELECT id FROM Driver d").getResultList();
+                List<String> driverNameList = em.createQuery("SELECT name FROM Driver d WHERE violation=null").getResultList();
+                List<Integer> driverIDList = em.createQuery("SELECT id FROM Driver d WHERE violation=null").getResultList();
                 // добавим вариант отсутствия водителя при создании
                 driverNameList.add(0, "0 Отсутствует"); driverIDList.add(0, 0);
                 // допишем ID каждому из имен для избежания путаницы
@@ -210,7 +193,7 @@ public class App {
                 JComboBox driverSelect = new JComboBox(driverNameList.toArray());
 
                 JLabel routeLabel = new JLabel("Доступные маршруты:");
-                List<Route> routes = em.createQuery("SELECT r FROM Route r").getResultList();
+                List<Route> routes = em.createQuery("SELECT r FROM Route r WHERE violation=null").getResultList();
                 // сформируем варианты выбора для JComboBox'а в формате "НомерМаршрута Старт Финиш"
                 List<String> routeBox = new ArrayList<>();
                 routeBox.add("0 Отсутствует");
@@ -371,7 +354,7 @@ public class App {
         if (!model.setCapacity(capacity)) throw new ValidationError("Вместимость должна быть неотрицательна");
         em.persist(model);
         // Выбор водителя при добавлении
-        Driver driver = null;
+        Driver driver;
         if (id_driver > 0) {
             driver = em.find(Driver.class, id_driver);
             // если водитель работает на другом автобусе, то создаем подтверждающее диалоговое окно
@@ -384,7 +367,7 @@ public class App {
             model.hireToDriver(driver);
         }
         // Выбор маршрута при добавлении
-        Route route = null;
+        Route route;
         if (id_route > 0 && id_driver > 0) { // без водителя маршрут не выбрать!
             route = em.find(Route.class, id_route);
             model.chooseRoute(route);
@@ -431,49 +414,50 @@ public class App {
         // кнопка добавления элемента
         JButton confirm = new JButton("Добавить запись");
         dialog.add(confirm, BorderLayout.SOUTH);
-        ActionListener actionAddItem = new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                try {
-                    // получаем все компоненты панели ввода данных
-                    Component[] components = editPanel.getComponents();
-                    // в зависимости от выбранной таблицы получаем введенные данные и передаем в функцию создания новой записи
-                    switch (tableSelect.getSelectedIndex()) {
-                        case 0: // автобус
-                            String registr = ((JTextField) components[1]).getText();
-                            int capacity = Integer.parseInt(((JTextField) components[3]).getText());
-                            int id_driver = Integer.parseInt(((String) ((JComboBox) components[5]).getSelectedItem()).split(" ")[0]);
-                            int id_route = Integer.parseInt(((String) ((JComboBox) components[7]).getSelectedItem()).split(" ")[0]);
-                            addBus(registr, capacity, id_driver, id_route, dialog);
-                            break;
-                        case 1: // водитель
-                            String name = ((JTextField) components[1]).getText();
-                            int age = Integer.parseInt(((JTextField) components[3]).getText());
-                            int exp = Integer.parseInt(((JTextField) components[5]).getText());
-                            addDriver(name, age, exp);
-                            break;
-                        case 2: // маршрут
-                            int number = Integer.parseInt(((JTextField) components[1]).getText());
-                            String start = ((JTextField) components[3]).getText();
-                            String finish = ((JTextField) components[5]).getText();
-                            String schedule = ((JTextField) components[7]).getText();
-                            addRoute(number, start, finish, schedule);
-                            break;
-                    }
-                    // закрыть окно JDialog и вывести сообщение об успешном добавлении
-                    JOptionPane.showMessageDialog(dialog, "<html><h2>Успешно</h2><i>Элемент добавлен</i>");
-                    // обновим таблицу для отображения изменений
-                    selectTable((String) tableSelect.getSelectedItem());
-                    // закроем диалоговое окно, т.к. оно выполнило свою функцию
-                    dialog.dispose();
+        ActionListener actionAddItem = e -> {
+            try {
+                // получаем все компоненты панели ввода данных
+                Component[] components = editPanel.getComponents();
+                // в зависимости от выбранной таблицы получаем введенные данные и передаем в функцию создания новой записи
+                switch (tableSelect.getSelectedIndex()) {
+                    // автобус
+                    case 0:
+                        String registr = ((JTextField) components[1]).getText();
+                        int capacity = Integer.parseInt(((JTextField) components[3]).getText());
+                        int id_driver = Integer.parseInt(((String) ((JComboBox) components[5]).getSelectedItem()).split(" ")[0]);
+                        int id_route = Integer.parseInt(((String) ((JComboBox) components[7]).getSelectedItem()).split(" ")[0]);
+                        addBus(registr, capacity, id_driver, id_route, dialog);
+                        break;
+                    // водитель
+                    case 1:
+                        String name = ((JTextField) components[1]).getText();
+                        int age = Integer.parseInt(((JTextField) components[3]).getText());
+                        int exp = Integer.parseInt(((JTextField) components[5]).getText());
+                        addDriver(name, age, exp);
+                        break;
+                    // маршрут
+                    case 2:
+                        int number = Integer.parseInt(((JTextField) components[1]).getText());
+                        String start = ((JTextField) components[3]).getText();
+                        String finish = ((JTextField) components[5]).getText();
+                        String schedule = ((JTextField) components[7]).getText();
+                        addRoute(number, start, finish, schedule);
+                        break;
                 }
-                catch (WritingError exc) {
-                    JOptionPane.showMessageDialog(dialog,"<html><h2>Ошибка</h2><i>Элемент не может быть добавлен, " +
-                            "попробуйте снова</i>", exc.getMessage(), JOptionPane.ERROR_MESSAGE);
-                }
-                catch (ValidationError exc) {
-                    JOptionPane.showMessageDialog(dialog,"<html><h2>Ошибка</h2>"+exc.getHelp(),
-                            exc.getMessage(), JOptionPane.ERROR_MESSAGE);
-                }
+                // закрыть окно JDialog и вывести сообщение об успешном добавлении
+                JOptionPane.showMessageDialog(dialog, "<html><h2>Успешно</h2><i>Элемент добавлен</i>");
+                // обновим таблицу для отображения изменений
+                selectTable((String) tableSelect.getSelectedItem());
+                // закроем диалоговое окно, т.к. оно выполнило свою функцию
+                dialog.dispose();
+            }
+            catch (WritingError exc) {
+                JOptionPane.showMessageDialog(dialog,"<html><h2>Ошибка</h2><i>Элемент не может быть добавлен, " +
+                        "попробуйте снова</i>", exc.getMessage(), JOptionPane.ERROR_MESSAGE);
+            }
+            catch (ValidationError exc) {
+                JOptionPane.showMessageDialog(dialog,"<html><h2>Ошибка</h2>"+exc.getHelp(),
+                        exc.getMessage(), JOptionPane.ERROR_MESSAGE);
             }
         };
         confirm.addActionListener(actionAddItem);
@@ -580,63 +564,67 @@ public class App {
             if (!em.getTransaction().isActive()) em.getTransaction().begin();
             // заполняем editPanel исходными данными
             switch (tableSelect.getSelectedIndex()) {
-                case 0: // автобус
+                // автобус
+                case 0:
                     Bus bus = em.find(Bus.class, ID);
-                    ((JTextField)components[1]).setText(bus.getRegistr());
-                    ((JTextField)components[3]).setText(Integer.toString(bus.getCapacity()));
+                    ((JTextField) components[1]).setText(bus.getRegistr());
+                    ((JTextField) components[3]).setText(Integer.toString(bus.getCapacity()));
                     if (bus.getDriver() != null)
-                        ((JComboBox)components[5]).setSelectedItem(Integer.toString(bus.getDriver().getId()) + " " + bus.getDriver().getName());
+                        ((JComboBox) components[5]).setSelectedItem(bus.getDriver().getId() + " " + bus.getDriver().getName());
                     if (bus.getRoute() != null)
-                        ((JComboBox)components[7]).setSelectedItem(bus.getRoute().toString());
+                        ((JComboBox) components[7]).setSelectedItem(bus.getRoute().toString());
                     break;
-                case 1: // водитель
+                // водитель
+                case 1:
                     Driver driver = em.find(Driver.class, ID);
-                    ((JTextField)components[1]).setText(driver.getName());
-                    ((JTextField)components[3]).setText(Integer.toString(driver.getAge()));
-                    ((JTextField)components[5]).setText(Integer.toString(driver.getExp()));
+                    ((JTextField) components[1]).setText(driver.getName());
+                    ((JTextField) components[3]).setText(Integer.toString(driver.getAge()));
+                    ((JTextField) components[5]).setText(Integer.toString(driver.getExp()));
                     break;
-                case 2: // маршрут
+                // маршрут
+                case 2:
                     Route route = em.find(Route.class, ID);
-                    ((JTextField)components[1]).setText(Integer.toString(route.getNumber()));
-                    ((JTextField)components[3]).setText(route.getStart());
-                    ((JTextField)components[5]).setText(route.getFinish());
-                    ((JTextField)components[7]).setText(route.getSchedule().getDays());
+                    ((JTextField) components[1]).setText(Integer.toString(route.getNumber()));
+                    ((JTextField) components[3]).setText(route.getStart());
+                    ((JTextField) components[5]).setText(route.getFinish());
+                    ((JTextField) components[7]).setText(route.getSchedule().getDays());
                     break;
             }
             // создаём слушатель для кнопки-подтверждения
-            ActionListener actionEditItem = new ActionListener() {
-                public void actionPerformed(ActionEvent e) {
-                    try {
-                        // в зависимости от выбранной таблицы получаем введенные данные и передаем в функцию создания новой записи
-                        switch (tableSelect.getSelectedIndex()) {
-                            case 0: // автобус
-                                Bus bus = em.find(Bus.class, ID);
-                                editBus(bus, components, dialog);
-                                break;
-                            case 1: // водитель
-                                Driver driver = em.find(Driver.class, ID);
-                                editDriver(driver, components, dialog);
-                                break;
-                            case 2: // маршрут
-                                Route route = em.find(Route.class, ID);
-                                editRoute(route, components, dialog);
-                                break;
-                        }
-                        // закрыть окно JDialog и вывести сообщение об успешном добавлении
-                        JOptionPane.showMessageDialog(dialog, "<html><h2>Успешно</h2><i>Элемент отредактирован</i>");
-                        // обновим таблицу для отображения изменений
-                        selectTable((String) tableSelect.getSelectedItem());
-                        // закроем диалоговое окно, т.к. оно выполнило свою функцию
-                        dialog.dispose();
+            ActionListener actionEditItem = e -> {
+                try {
+                    // в зависимости от выбранной таблицы получаем введенные данные и передаем в функцию создания новой записи
+                    switch (tableSelect.getSelectedIndex()) {
+                        // автобус
+                        case 0:
+                            Bus bus = em.find(Bus.class, ID);
+                            editBus(bus, components, dialog);
+                            break;
+                        // водитель
+                        case 1:
+                            Driver driver = em.find(Driver.class, ID);
+                            editDriver(driver, components, dialog);
+                            break;
+                        // маршрут
+                        case 2:
+                            Route route = em.find(Route.class, ID);
+                            editRoute(route, components, dialog);
+                            break;
                     }
-                    catch (WritingError exc) {
-                        JOptionPane.showMessageDialog(dialog,"<html><h2>Ошибка</h2><i>Элемент не может быть изменён, " +
-                                "попробуйте снова</i>", exc.getMessage(), JOptionPane.ERROR_MESSAGE);
-                    }
-                    catch (ValidationError exc) {
-                        JOptionPane.showMessageDialog(dialog,"<html><h2>Ошибка</h2>"+exc.getHelp(),
-                                exc.getMessage(), JOptionPane.ERROR_MESSAGE);
-                    }
+                    // закрыть окно JDialog и вывести сообщение об успешном добавлении
+                    JOptionPane.showMessageDialog(dialog, "<html><h2>Успешно</h2><i>Элемент отредактирован</i>");
+                    // обновим таблицу для отображения изменений
+                    selectTable((String) tableSelect.getSelectedItem());
+                    // закроем диалоговое окно, т.к. оно выполнило свою функцию
+                    dialog.dispose();
+                }
+                catch (WritingError exc) {
+                    JOptionPane.showMessageDialog(dialog,"<html><h2>Ошибка</h2><i>Элемент не может быть изменён, " +
+                            "попробуйте снова</i>", exc.getMessage(), JOptionPane.ERROR_MESSAGE);
+                }
+                catch (ValidationError exc) {
+                    JOptionPane.showMessageDialog(dialog,"<html><h2>Ошибка</h2>"+exc.getHelp(),
+                            exc.getMessage(), JOptionPane.ERROR_MESSAGE);
                 }
             };
             confirm.addActionListener(actionEditItem);
@@ -661,30 +649,33 @@ public class App {
                     "Окно подтверждения", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
             if (result == JOptionPane.YES_OPTION) {
                 for (int rowIndex: indexes) {
-                        // удаление элемента из БД и сразу визуально из таблицы
-                        int ID = Integer.parseInt((String) dtm.getValueAt(rowIndex, 0));
-                        if (!em.getTransaction().isActive()) em.getTransaction().begin();
-                        switch (tableSelect.getSelectedIndex()) {
-                            case 0: // удаляем автобус
-                                Bus bus = em.find(Bus.class, ID);
-                                // увольняем водителя(и если автобус был на маршруте, то он также удалится)
-                                bus.fireToDriver();
-                                em.remove(bus);
-                                break;
-                            case 1: // удаляем водителя
-                                Driver driver = em.find(Driver.class, ID);
-                                if (driver.getBus() != null)
-                                    driver.getBus().fireToDriver();
-                                em.remove(driver);
-                                break;
-                            case 2: // удаляем маршрут
-                                Route route = em.find(Route.class, ID);
-                                // снимаем все автобусы с маршрута, чтобы не удалить вместе
-                                route.exclude();
-                                em.remove(route);
-                                break;
-                        }
-                        em.getTransaction().commit();
+                    // удаление элемента из БД и сразу визуально из таблицы
+                    int ID = Integer.parseInt((String) dtm.getValueAt(rowIndex, 0));
+                    if (!em.getTransaction().isActive()) em.getTransaction().begin();
+                    // увольняем водителя(и если автобус был на маршруте, то он также удалится)
+                    // снимаем все автобусы с маршрута, чтобы не удалить вместе
+                    switch (tableSelect.getSelectedIndex()) {
+                        // удаляем автобус
+                        case 0:
+                            Bus bus = em.find(Bus.class, ID);
+                            bus.fireToDriver();
+                            em.remove(bus);
+                            break;
+                        // удаляем водителя
+                        case 1:
+                            Driver driver = em.find(Driver.class, ID);
+                            if (driver.getBus() != null)
+                                driver.getBus().fireToDriver();
+                            em.remove(driver);
+                            break;
+                        // удаляем маршрут
+                        case 2:
+                            Route route = em.find(Route.class, ID);
+                            route.exclude();
+                            em.remove(route);
+                            break;
+                    }
+                    em.getTransaction().commit();
                 }
                 // удаляем визуально из таблицы в приложении
                 for (int i = indexes.length - 1; i>=0; --i) {
@@ -707,15 +698,14 @@ public class App {
         if (!em.getTransaction().isActive()) em.getTransaction().begin();
 
         Bus model = em.find(Bus.class, ID);
+        violation_description = violation_description + ": " + model.getRegistr();
         Violation violation = null;
-        Violation fix = null;
         if (model.getViolation() != null) {
-            fix = em.find(Violation.class, model.getViolation().getId());
+            Violation fix = em.find(Violation.class, model.getViolation().getId());
             fix.setFixDate(new Date());
-            violation_description = "";
+            if (model.getViolation().getDescription().equals(violation_description)) violation_description = "";
         }
         if (violation_description.length() > 0) {
-            violation_description = violation_description + ": " + model.getRegistr();
             violation = new Violation(violation_description);
         }
         model.setViolation(violation);
@@ -730,15 +720,14 @@ public class App {
         if (!em.getTransaction().isActive()) em.getTransaction().begin();
 
         Driver model = em.find(Driver.class, ID);
+        violation_description = violation_description + ": " + model.getName();
         Violation violation = null;
-        Violation fix = null;
         if (model.getViolation() != null) {
-            fix = em.find(Violation.class, model.getViolation().getId());
+            Violation fix = em.find(Violation.class, model.getViolation().getId());
             fix.setFixDate(new Date());
-            violation_description = "";
+            if (model.getViolation().getDescription().equals(violation_description)) violation_description = "";
         }
         if (violation_description.length() > 0) {
-            violation_description = violation_description + ": " + model.getName();
             violation = new Violation(violation_description);
         }
         model.setViolation(violation);
@@ -753,15 +742,14 @@ public class App {
         if (!em.getTransaction().isActive()) em.getTransaction().begin();
 
         Route model = em.find(Route.class, ID);
+        violation_description = violation_description + ": №" + model.getNumber();
         Violation violation = null;
-        Violation fix = null;
         if (model.getViolation() != null) {
-            fix = em.find(Violation.class, model.getViolation().getId());
+            Violation fix = em.find(Violation.class, model.getViolation().getId());
             fix.setFixDate(new Date());
-            violation_description = "";
+            if (model.getViolation().getDescription().equals(violation_description)) violation_description = "";
         }
         if (violation_description.length() > 0) {
-            violation_description = violation_description + ": №" + model.getNumber();
             violation = new Violation(violation_description);
         }
         model.setViolation(violation);

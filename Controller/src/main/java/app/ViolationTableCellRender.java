@@ -31,6 +31,7 @@ public class ViolationTableCellRender extends DefaultTableCellRenderer {
                         c.setBackground(Color.RED);
                     }
                 }
+                else if (bus.getDriver() == null || bus.getRoute() == null) c.setBackground(Color.LIGHT_GRAY);
                 else c.setBackground(Color.WHITE);
                 break;
             case 1: // водители

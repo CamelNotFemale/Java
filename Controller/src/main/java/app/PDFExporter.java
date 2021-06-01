@@ -1,4 +1,4 @@
-package utils;
+package app;
 
 import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.*;
@@ -10,7 +10,7 @@ import java.util.Date;
 import javax.swing.JFrame;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
-
+// сделать параллельным составление отчётов для каждой из таблиц, а после склеить их в один файл
 public class PDFExporter extends JFrame {
 
     // экспорт выбранной таблицы данных

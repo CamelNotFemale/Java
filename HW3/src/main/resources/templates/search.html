@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="../static/css/style.css" th:href="@{/css/style.css}">
+</head>
+<body>
+
+    <section>
+        <form action="google" method="post">
+            <input name="search_google" type="search" placeholder="search">
+            <button>Go</button>
+        </form>
+        <form action="yandex" method="post">
+            <input name="search_yandex" type="search" placeholder="search">
+            <button>Ya</button>
+        </form>
+        <form action="duck" method="post">
+            <input name="search_duck" type="search" placeholder="search">
+            <button>Duck</button>
+        </form>
+    </section>
+
+</body>
+</html>
