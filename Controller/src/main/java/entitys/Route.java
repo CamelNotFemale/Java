@@ -116,21 +116,6 @@ public class Route {
         }
         else return false;
     }
-    public static void showReport() {
-        System.out.println("Routes:");
-        if (routes.size() != 0) {
-            for (Route rt: routes) {
-                System.out.println("  №" + rt.getNumber() + ' ' + rt.getStart() + "->" + rt.getFinish());
-                if (rt.buses.size() != 0) {
-                    System.out.println("  buses on route: " + rt.buses.size());
-                    rt.schedule.print();
-                }
-                else
-                    System.out.println("  temporaly not working...");
-            }
-        }
-        else System.out.println("  is Empty");
-    }
     public String toString() {
         return Integer.toString(id) + " " + Integer.toString(number) + " " + start + " " + finish;
     }
@@ -138,5 +123,16 @@ public class Route {
         String[] res = new String[] {String.valueOf(id), String.valueOf(number), start, finish, schedule.getDays(), "Ок"};
         if (violation != null) res[5] = violation.getDescription();
         return res;
+    }
+    public String toHTMLFormat() {
+        StringBuffer buff = new StringBuffer();
+        buff.append("<span><b>" + "Маршрут №" + getNumber() + ' ' + getStart() + "->" + getFinish() + "</span><br>");
+        if (buses.size() != 0) {
+            buff.append(schedule.toHTMLFormat());
+            buff.append("<pre>    автобусов на маршруте: " + buses.size() + "</pre>");
+        }
+        else
+            buff.append("<pre style=\"color:red\">    в настоящее время не работает" + "</pre>");
+        return buff.toString();
     }
 }

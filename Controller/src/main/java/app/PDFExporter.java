@@ -19,8 +19,9 @@ public class PDFExporter extends JFrame {
         FileDialog fileDial = new FileDialog(this, "Export PDF", FileDialog.SAVE);
         fileDial.setFile("*.pdf");
         fileDial.setVisible(true);
-        if (!fileDial.getFile().contains("."))
-            fileDial.setFile(fileDial.getFile()+".pdf");
+        if (fileDial.getFile() != null)
+            if (!fileDial.getFile().contains("."))
+                fileDial.setFile(fileDial.getFile()+".pdf");
         String fileFullName = fileDial.getDirectory() + fileDial.getFile();
 
         if(!fileFullName.equals("nullnull"))

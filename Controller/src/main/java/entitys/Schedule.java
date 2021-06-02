@@ -48,5 +48,15 @@ public class Schedule {
         String[] res = new String[] {String.valueOf(id), days};
         return res;
     }
+    public String toHTMLFormat() {
+        StringBuffer buff = new StringBuffer();
+        buff.append("<span>");
+        for (int i=0; i<7; ++i) {
+            buff.append(Days.values()[i] + ": с " + getStart(i) + " до "
+                    + getFinish(i) + " с интервалом в " + getInterval(i) + " минут<br>");
+        }
+        buff.append("</span>");
+        return buff.toString();
+    }
 }
 

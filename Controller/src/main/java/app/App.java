@@ -40,7 +40,7 @@ public class App {
         App.setSize(500, 300);
         App.setLocation(100, 100);
         App.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-// Создание кнопок и прикрепление иконок
+// Создание кнопок и прикрепление иконок на панель инструментов
         tableSelect = new JComboBox(new String[]{"Автобусы", "Водители",
                 "Маршруты"});
         add = new JButton(new ImageIcon("./src/main/resources/img/add.png")); //new ImageIcon("./src/main/resources/img/add.png")
@@ -98,15 +98,11 @@ public class App {
         selectTable("Автобусы");
 
 // Подготовка компонентов поиска
-        //author = new JComboBox(new String[]{"Автор", "Александр Дюма",
-        //        "Алексей Толстой"});
-        //bookName = new JTextField("Название книги");
         report = new JButton("Справка и нарушения");
+        report.addActionListener(e -> new ReportThread("report", em));
 
 // Добавление компонентов на панель
         JPanel reportPanel = new JPanel();
-        //reportPanel.add(author);
-        //reportPanel.add(bookName);
         reportPanel.add(report);
 
 // Размещение панели поиска внизу окна

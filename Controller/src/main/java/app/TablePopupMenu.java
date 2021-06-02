@@ -4,12 +4,9 @@ import entitys.*;
 
 import javax.swing.*;
 import javax.swing.event.*;
-import javax.swing.text.MaskFormatter;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
-
-import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
 
 public class TablePopupMenu extends JPopupMenu {
 

@@ -51,4 +51,10 @@ public class Violation {
     public void setFixDate(Date _fixdatetime) {
         fixdatetime = _fixdatetime;
     }
+    public String toHTMLFormat() {
+        StringBuffer buff = new StringBuffer();
+        String date = "<a style=\"color:red\">["+getDate().toString()+"]</a>";
+        buff.append("<p>" + date + " " + getDescription() + "</p>");
+        return buff.toString();
+    }
 }
