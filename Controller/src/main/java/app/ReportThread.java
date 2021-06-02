@@ -19,7 +19,6 @@ public class ReportThread extends Thread{
     public ReportThread(String name, EntityManager _em) {
         super(name);
         em = _em;
-        start();
     }
     public void run() {
         createUI();

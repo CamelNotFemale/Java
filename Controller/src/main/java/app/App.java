@@ -34,7 +34,10 @@ public class App {
     private JTable table;
     private JButton report;
 
-    public void show() {
+    public App() {
+        show();
+    }
+    private void show() {
 // Создание окна
         App = new JFrame("Диспетчерская");
         App.setSize(500, 300);
@@ -99,7 +102,7 @@ public class App {
 
 // Подготовка компонентов поиска
         report = new JButton("Справка и нарушения");
-        report.addActionListener(e -> new ReportThread("report", em));
+        report.addActionListener(e -> new ReportThread("report", em).start());
 
 // Добавление компонентов на панель
         JPanel reportPanel = new JPanel();

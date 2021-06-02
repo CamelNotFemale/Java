@@ -2,6 +2,7 @@ package app;
 
 import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.*;
+import org.apache.log4j.Logger;
 
 import java.awt.FileDialog;
 import java.io.*;
@@ -12,10 +13,11 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 // сделать параллельным составление отчётов для каждой из таблиц, а после склеить их в один файл
 public class PDFExporter extends JFrame {
-
+    public static final Logger logger = Logger.getLogger(PDFExporter.class);
     // экспорт выбранной таблицы данных
     public PDFExporter(JTable TableData)
     {
+        logger.debug("File exported successfully");
         FileDialog fileDial = new FileDialog(this, "Export PDF", FileDialog.SAVE);
         fileDial.setFile("*.pdf");
         fileDial.setVisible(true);
@@ -33,8 +35,10 @@ public class PDFExporter extends JFrame {
                 PdfWriter.getInstance(document, new FileOutputStream(fileFullName));
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
+                logger.error("File Not Found", e);
             } catch (DocumentException e) {
                 e.printStackTrace();
+                logger.error("IO exception occured", e);
             }
 
             Font font = FontFactory.getFont("/fonts/DejaVuSans.ttf", "cp1251", BaseFont.EMBEDDED, 10);
@@ -66,16 +70,17 @@ public class PDFExporter extends JFrame {
             try {
                 document.add(info);
                 document.add(pdfTable);
+                logger.debug("File exported successfully");
             } catch (DocumentException e) {
                 e.printStackTrace();
+                logger.error("Write Error", e);
             }
 
             document.close();
         }
-    }
-    // справка о графике движения автобусов и отчёт о его нарушениях
-    public PDFExporter() {
-
+        else {
+            logger.warn("User aborted file loading operation");
+        }
     }
 
     private String[][] getTableData(JTable table) {
