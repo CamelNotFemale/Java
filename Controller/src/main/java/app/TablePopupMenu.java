@@ -7,9 +7,17 @@ import javax.swing.event.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
-
+/**
+ * Класс поп-ап меню для таблицы
+ * @author Дмитрий Дементьев 9308
+ * @version 0.1
+ */
 public class TablePopupMenu extends JPopupMenu {
-
+    /**
+     * Конструктор - создание нового объекта TablePopupMenu
+     * @param table - таблица данных, для которой создается поп-ап меню
+     * @param select - идентификатор выбранной таблицы(название)
+     */
     public TablePopupMenu(JTable table, String select) {
         super();
         // автоматически выбрать строку, в которой был сделан щелчок правой кнопкой мыши
@@ -98,8 +106,17 @@ public class TablePopupMenu extends JPopupMenu {
         }
     }
 }
-
+/**
+ * Класс просмотра расписания маршрута
+ * @author Дмитрий Дементьев 9308
+ * @version 0.1
+ */
 class ScheduleViewer extends JFrame {
+    /**
+     * Конструктор - создание нового объекта ScheduleViewer
+     * @param num - номер маршрута, для которого вызывается расписание
+     * @param schedule - расписание маршрута
+     */
     ScheduleViewer(String num, String schedule) {
         super("Маршрут №" + num);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);

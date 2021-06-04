@@ -11,13 +11,20 @@ import java.util.Date;
 import javax.swing.JFrame;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
-// сделать параллельным составление отчётов для каждой из таблиц, а после склеить их в один файл
+/**
+ * Класс экспортёра PDF
+ * @author Дмитрий Дементьев 9308
+ * @version 0.1
+ */
 public class PDFExporter extends JFrame {
+    /** Статическое поле для логгера */
     public static final Logger logger = Logger.getLogger(PDFExporter.class);
-    // экспорт выбранной таблицы данных
+    /**
+     * Конструктор - создание нового объекта HTMLExporter
+     * @param TableData - таблица данных для экспорта
+     */
     public PDFExporter(JTable TableData)
     {
-        logger.debug("File exported successfully");
         FileDialog fileDial = new FileDialog(this, "Export PDF", FileDialog.SAVE);
         fileDial.setFile("*.pdf");
         fileDial.setVisible(true);
@@ -82,7 +89,11 @@ public class PDFExporter extends JFrame {
             logger.warn("User aborted file loading operation");
         }
     }
-
+    /**
+     * Функция получения данных из таблицы
+     * @param table - таблица данных
+     * @return данные исходной таблицы в формате двумерного массива строк
+     */
     private String[][] getTableData(JTable table) {
         DefaultTableModel dtm = (DefaultTableModel) table.getModel();
         int nRow = dtm.getRowCount(), nCol = dtm.getColumnCount();

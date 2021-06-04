@@ -5,19 +5,36 @@ import entitys.*;
 import javax.persistence.EntityManager;
 import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
-import javax.swing.table.DefaultTableModel;
 import java.awt.*;
-
+/**
+ * Класс рендера таблицы данных
+ * @author Дмитрий Дементьев 9308
+ * @version 0.1
+ */
 public class ViolationTableCellRender extends DefaultTableCellRenderer {
-
+    /** Поле, содержащее ссылку на EntityManager */
     private EntityManager em;
+    /** Поле, содержащее индекс таблицы для рендера */
     private int index; // для какой из таблиц вызван рендер
-
+    /**
+     * Конструктор - создание нового объекта ViolationTableCellRender
+     * @param _em - ссылка на EntityManager
+     * @param _index - индекс таблицы для рендера
+     */
     public ViolationTableCellRender(EntityManager _em, int _index) {
         super();
         em = _em;
         index = _index;
     }
+    /**
+     * Функция выделения строки таблицы в определенный цвет
+     * @param table - таблица
+     * @param value - значение ячейки
+     * @param isSelected - выбор ячейки
+     * @param hasFocus - наведение на ячейку
+     * @param row - номер строки
+     * @param column - номер столбца
+     */
     @Override
     public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column)
     {

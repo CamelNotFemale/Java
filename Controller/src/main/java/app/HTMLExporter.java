@@ -5,7 +5,16 @@ import java.io.*;
 
 import javax.swing.JFrame;
 
+/**
+ * Класс экспортёра HTML
+ * @author Дмитрий Дементьев 9308
+ * @version 0.1
+ */
 public class HTMLExporter extends JFrame {
+    /**
+     * Конструктор - создание нового объекта HTMLExporter
+     * @param html - строка размеченная в стиле HTML
+     */
     public HTMLExporter(String html) {
         FileDialog fileDial = new FileDialog(this, "Export HTML", FileDialog.SAVE);
         fileDial.setFile("*.html");

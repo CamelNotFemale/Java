@@ -14,32 +14,48 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
-import static javax.swing.WindowConstants.*;
-
-public class App {
+/**
+ * Класс главного интерфейса программы
+ * @author Дмитрий Дементьев 9308
+ * @version 0.1
+ */
+public class App extends JFrame {
+    /** Статическое поле фабрики сущностей */
     private static final EntityManagerFactory emf = Persistence.createEntityManagerFactory("test_persistence");
+    /** Статическое поле менеджера сущностей */
     private static final EntityManager em = emf.createEntityManager();
-    // Объявления графических компонентов
+    /** Статическое поле менеджера сущностей */
     private JFrame App;
-    private DefaultTableModel model;
+    /** Статическое поле менеджера сущностей */
     private JComboBox tableSelect;
+    /** Статическое поле менеджера сущностей */
     private JButton add;
+    /** Статическое поле менеджера сущностей */
     private JButton edit;
+    /** Статическое поле менеджера сущностей */
     private JButton remove;
+    /** Статическое поле менеджера сущностей */
     private JButton export;
-
+    /** Статическое поле менеджера сущностей */
     private JToolBar toolBar;
+    /** Статическое поле менеджера сущностей */
     private JScrollPane scroll;
+    /** Статическое поле менеджера сущностей */
     private JTable table;
     private JButton report;
-
+    /**
+     * Конструктор объекта App по-умолчанию
+     */
     public App() {
-        show();
+        super("Диспетчерская");
+        App = this;
+        showGUI();
     }
-    private void show() {
+    /**
+     * Функция задания интерфейса и его показа
+     */
+    public void showGUI() {
 // Создание окна
-        App = new JFrame("Диспетчерская");
         App.setSize(500, 300);
         App.setLocation(100, 100);
         App.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -130,7 +146,7 @@ public class App {
                 }
                 break;
             case ("Водители"):
-                columns = new String[] {"ID", "ФИО", "Возраст", "Опыт", "Зарплата", "Состояние"};
+                columns = new String[] {"ID", "ФUО", "Возраст", "Опыт", "Зарплата", "Состояние"};
                 List<Driver> driverList = em.createQuery("SELECT d FROM Driver d").getResultList();
                 data = new String[driverList.size()][columns.length];
                 for (int i = 0; i<driverList.size(); i++) {
@@ -146,7 +162,7 @@ public class App {
                 }
                 break;
         }
-        model = new DefaultTableModel(data, columns) {
+        DefaultTableModel model = new DefaultTableModel(data, columns) {
             @Override // запрет на редактирование ячеек
             public boolean isCellEditable(int row, int column) {
                 return false;
@@ -209,9 +225,7 @@ public class App {
                 editPanel.add(routeLabel); editPanel.add(routeSelect);
                 break;
             case 1: // водитель
-                JLabel nameLabel = new JLabel("ФИО");
-                //MaskFormatter nameFormatter = new MaskFormatter("********************");
-                //nameFormatter.setValidCharacters(" '-абвгдеёжзийклмнопрстуфхцчшщъыьэюяАБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯqwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM");
+                JLabel nameLabel = new JLabel("ФUО");
                 JFormattedTextField name = new JFormattedTextField();
                 JLabel ageLabel = new JLabel("Возраст:");
                 MaskFormatter ageFormatter = new MaskFormatter("##");
@@ -232,8 +246,6 @@ public class App {
                 numFormatter.setPlaceholderCharacter('0');
                 numFormatter.setValidCharacters("0123456789");
                 JFormattedTextField number = new JFormattedTextField(numFormatter);
-                //MaskFormatter placeFormatter = new MaskFormatter("********************");
-                //placeFormatter.setValidCharacters(" '-абвгдеёжзийклмнопрстуфхцчшщъыьэюяАБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯqwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM");
                 JLabel startLabel = new JLabel("Начало маршрута: ");
                 JFormattedTextField start = new JFormattedTextField();
                 JLabel finishLabel = new JLabel("Конечная остановка: ");
@@ -318,7 +330,7 @@ public class App {
                             to = ((JFormattedTextField)dayComponents[3]).getText(),
                             interval = ((JFormattedTextField)dayComponents[5]).getText();
                     str += from + " " + to + " " + interval + ";";
-                    // если время начала позже времени окончания ИЛИ указанное время некорректно ИЛИ интервал <3 минут
+                    // если время начала позже времени окончания или указанное время некорректно или интервал <3 минут
                     if (from.compareTo(to) >= 0 || from.compareTo("23:59") > 0 ||
                             to.compareTo("23:59") > 0 || interval.compareTo("03") < 0) {
                         validData = false;
@@ -556,7 +568,7 @@ public class App {
             // получаем все компоненты панели ввода данных
             Component[] components = editPanel.getComponents();
             // кнопка редактирования элемента
-            JButton confirm = new JButton("Изменить запись");
+            JButton confirm = new JButton("Uзменить запись");
             dialog.add(confirm, BorderLayout.SOUTH);
             // достаём ID редактируемого элемента
             int ID = Integer.parseInt((String) dtm.getValueAt(rowIndex, 0));

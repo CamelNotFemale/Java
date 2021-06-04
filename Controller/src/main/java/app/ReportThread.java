@@ -8,18 +8,34 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.Date;
 import java.util.List;
-
+/**
+ * Класс поток для генерации отчёта по маршрутам и нарушениям
+ * @author Дмитрий Дементьев 9308
+ * @version 0.1
+ */
 public class ReportThread extends Thread{
+    /** Поле со ссылкой на EntityManager */
     final private EntityManager em;
-    private JTextPane textEditor = null;
+    /** Поле текстового редактора для отображения отчёта */
+    final private JTextPane textEditor = new JTextPane();
+    /** Поле для кнопки экспорта */
     final private JButton export = new JButton(new ImageIcon("./src/main/resources/img/html.png"));
+    /** Поле для кнопки обновления данных */
     final private JButton refresh = new JButton(new ImageIcon("./src/main/resources/img/refresh.png"));
+    /** Поле для указания даты последнего обновления */
     final private JLabel date = new JLabel();
-
+    /**
+     * Конструктор - создание нового потока ReportThread
+     * @param name - имя потока
+     * @param _em - ссылка на EntityManager
+     */
     public ReportThread(String name, EntityManager _em) {
         super(name);
         em = _em;
     }
+    /**
+     * Функция запуска потока
+     */
     public void run() {
         createUI();
         synchronized (textEditor) {
@@ -27,6 +43,9 @@ public class ReportThread extends Thread{
             loadTextToHTML();
         }
     }
+    /**
+     * Функция создания интерфейса отчёта
+     */
     private void createUI() {
         JFrame frame = new JFrame("Справка и выявленные нарушения");
         frame.setSize(400, 300);
@@ -35,7 +54,7 @@ public class ReportThread extends Thread{
         frame.setLayout(new BorderLayout());
 
         // Создание редактора
-        textEditor = new JTextPane();
+        //textEditor = new JTextPane();
         textEditor.setEditable(false);
         textEditor.setContentType("text/html");
         // возможные действия с отчётом и информация
@@ -67,11 +86,17 @@ public class ReportThread extends Thread{
         frame.setSize(480, 560);
         frame.setVisible(true);
     }
+    /**
+     * Функция задания текущего времени
+     */
     private void setDate() {
         date.setText("recent change " + new Date().toString());
     }
+    /**
+     * Функция загрузки отчёта HTML формата в {@link ReportThread#textEditor}
+     */
     private void loadTextToHTML() {
-        StringBuffer doc = new StringBuffer();
+        StringBuilder doc = new StringBuilder();
         // начало HTML файла
         doc.append("<html><body style=\"font-size:12px\" style=\"font-family: FreeSans\">");
         doc.append("<head>" + "<meta http-equiv=\"content-type\" content=\"application/xhtml+xml; charset=UTF-8\"/>" + "</head>");
@@ -79,7 +104,7 @@ public class ReportThread extends Thread{
         // заголовок отчёта
         doc.append("<h1><strong><span style=\"font-size:16px\">" + "Отчёт от " + new Date() + "</span></strong></h1><hr>");
         // добавляем информацию о маршрутах
-        doc.append("<h3><strong><span style=\"font-size:14px\">" + "Информация о маршрутах" + "</span></strong></h3>");
+        doc.append("<h3><strong><span style=\"font-size:14px\">" + "Uнформация о маршрутах" + "</span></strong></h3>");
         java.util.List<Route> routeList = em.createQuery("SELECT r FROM Route r").getResultList();
         for (int i = 0; i < routeList.size(); ++i) {
             doc.append("<p style=\"margin-left: 10px\">");

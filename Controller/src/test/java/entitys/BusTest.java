@@ -6,9 +6,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.*;
-
+/**
+ * Класс тестирования
+ * @author Дмитрий Дементьев 9308
+ * @version 0.1
+ */
 public class BusTest {
-
+    /**
+     * Функция тестирования определения регистрационного номера автобуса
+     */
     @Test
     public void setRegistr() {
         // формат номера - от 1 до 6 символов, первый символ обязательно буква
@@ -17,7 +23,9 @@ public class BusTest {
         model.setRegistr(new_reg);
         assertEquals(new_reg, model.getRegistr());
     }
-
+    /**
+     * Функция тестирования определения вместительности автобуса
+     */
     @Test
     public void setCapacity() {
         // допускается 0 < capacity
@@ -26,7 +34,9 @@ public class BusTest {
         assertFalse(model.setCapacity(new_capacity));
         assertEquals(new_capacity, model.getCapacity()); // значение по-умолчанию
     }
-
+    /**
+     * Функция тестирования наёма водителя для автобуса
+     */
     @Test
     public void hireToDriver() {
         // при наёме работника прошлый работник(если он был) должен быть уволен
@@ -37,7 +47,9 @@ public class BusTest {
         assertEquals(model.getDriver().getName(), person_two.getName());
         assertNull(person_one.getBus());
     }
-
+    /**
+     * Функция тестирования преобразования к табличному формату
+     */
     @Test
     public void toTableFormat() {
         // проверка на корректность преобразования к формату для занесения в таблицу DefaultTableModel
@@ -50,7 +62,9 @@ public class BusTest {
             assertEquals(expected[i], received[i]);
         }
     }
-
+    /**
+     * Функция тестирования выбора маршрута для автобуса
+     */
     @Test
     public void chooseRoute() {
         // все автобусы выставленные на маршрут должны оказаться в списке объекта Маршрут и совпасть ссылки на них
@@ -74,7 +88,9 @@ public class BusTest {
             assertSame(list.get(i), route.getBuses().get(i));
         }
     }
-
+    /**
+     * Функция тестирования определения нарушения
+     */
     @Test
     public void setViolation() {
         Bus model = new Bus();
