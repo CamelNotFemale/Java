@@ -6,8 +6,17 @@ import entitys.Route;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-
+/**
+ * Класс менеджера удаления записей
+ * @author Дмитрий Дементьев 9308
+ * @version 0.1
+ */
 public class RemovalManager {
+    /**
+     * Конструктор - создание нового объекта RemovalManager
+     * @param frame - окно-родитель, из которого вызывается диалоговое окно
+     * @param table - таблицы данных для удаления записей
+     */
     protected RemovalManager(App frame, JTable table) {
         DefaultTableModel dtm = (DefaultTableModel) table.getModel();
         int indexes[] = table.getSelectedRows();

@@ -8,7 +8,6 @@ import javax.swing.table.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.text.ParseException;
-import java.util.Date;
 import java.util.List;
 /**
  * Класс главного интерфейса программы

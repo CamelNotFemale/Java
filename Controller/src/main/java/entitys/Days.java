@@ -5,4 +5,4 @@ package entitys;
  * @author Дмитрий Дементьев 9308
  * @version 0.1
  */
-public enum Days { Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday }
+public enum Days { Понедельник, Вторник, Среда, Четверг, Пятница, Суббота, Воскресенье }

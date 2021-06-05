@@ -7,8 +7,18 @@ import javax.swing.text.MaskFormatter;
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.text.ParseException;
-
+/**
+ * Класс диалогового окна для задания расписания
+ * @author Дмитрий Дементьев 9308
+ * @version 0.1
+ */
 public class ScheduleDialog extends JDialog {
+    /**
+     * Конструктор - создание нового объекта ScheduleDialog
+     * @param parent - ссылка на окно-родитель, вызывающего новый объект ScheduleDialog
+     * @param schedule - текстовое поле, содержащее расписание
+     * @throws ParseException - некорректные данные в поле расписания
+     */
     protected ScheduleDialog(JDialog parent, JTextField schedule) throws ParseException {
         super(parent, "Составление расписания", true);
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
