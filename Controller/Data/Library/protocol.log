@@ -7456,3 +7456,18 @@
 2021-06-05 23:07:19 INFO  QueryTranslatorFactoryInitiator:47 - HHH000397: Using ASTQueryTranslatorFactory
 2021-06-05 23:07:20 INFO  Controller:12 - Finish app
 2021-06-05 23:28:43 WARN  PDFExporter:89 - User aborted file loading operation
+2021-07-08 23:39:54 INFO  Controller:9 - Start app
+2021-07-08 23:39:56 INFO  LogHelper:31 - HHH000204: Processing PersistenceUnitInfo [
+	name: test_persistence
+	...]
+2021-07-08 23:39:56 INFO  Version:46 - HHH000412: Hibernate Core {5.3.7.Final}
+2021-07-08 23:39:57 INFO  Environment:213 - HHH000206: hibernate.properties not found
+2021-07-08 23:39:57 INFO  Version:49 - HCANN000001: Hibernate Commons Annotations {5.0.4.Final}
+2021-07-08 23:40:01 WARN  pooling:73 - HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2021-07-08 23:40:01 INFO  pooling:129 - HHH10001005: using driver [com.mysql.cj.jdbc.Driver] at URL [jdbc:mysql://localhost:3306/controller]
+2021-07-08 23:40:01 INFO  pooling:138 - HHH10001001: Connection properties: {password=****, user=root}
+2021-07-08 23:40:01 INFO  pooling:143 - HHH10001003: Autocommit mode: false
+2021-07-08 23:40:01 INFO  DriverManagerConnectionProviderImpl:281 - HHH000115: Hibernate connection pool size: 20 (min=1)
+2021-07-08 23:40:06 INFO  Dialect:157 - HHH000400: Using dialect: org.hibernate.dialect.MySQL57Dialect
+2021-07-08 23:40:12 INFO  QueryTranslatorFactoryInitiator:47 - HHH000397: Using ASTQueryTranslatorFactory
+2021-07-08 23:40:15 INFO  Controller:12 - Finish app
