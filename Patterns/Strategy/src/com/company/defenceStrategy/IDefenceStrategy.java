@@ -10,5 +10,5 @@ public interface IDefenceStrategy {
     /** Реализовать стратегию защиты */
     void executeStrategy();
     /** Проверка защиты от конкретного типа врага */
-    public abstract StrategyFactory.EnemyType getEnemyType();
+    StrategyFactory.EnemyType getEnemyType();
 }

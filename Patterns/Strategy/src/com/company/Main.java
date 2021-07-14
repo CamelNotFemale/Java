@@ -12,6 +12,7 @@ public class Main {
 
         nightElfBase.setDefenceStrategy(strategyAgainstHuman);
         nightElfBase.enemyAttack(StrategyFactory.EnemyType.HUMAN);
+        nightElfBase.setDefenceStrategy(strategyAgainstOrc);
         nightElfBase.enemyAttack(StrategyFactory.EnemyType.ORC);
     }
 }
