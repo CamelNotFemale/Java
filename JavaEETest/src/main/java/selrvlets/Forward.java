@@ -10,7 +10,7 @@ public class Forward extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // Forward
-        RequestDispatcher dispatcher = request.getRequestDispatcher("user_form.html");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/profile");
         dispatcher.forward(request, response);
     }
 

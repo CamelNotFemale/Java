@@ -14,4 +14,12 @@
         <url-pattern>/hello</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>UserForm</servlet-name>
+        <jsp-file>/user_form.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>UserForm</servlet-name>
+        <url-pattern>/profile</url-pattern>
+    </servlet-mapping>
 </web-app>
