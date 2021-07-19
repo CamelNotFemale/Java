@@ -16,6 +16,7 @@ public class ProfileServlet extends HttpServlet {
         PrintWriter writer = response.getWriter();
 
         HttpSession session = request.getSession();
+
         writer.println("<p>" + "Your phone number: " + session.getAttribute("user_phone_number") + "</p>");
     }
 
@@ -34,7 +35,10 @@ public class ProfileServlet extends HttpServlet {
             HttpSession session = request.getSession();
             session.setAttribute("user_name", name);
             session.setAttribute("user_age", age);
+            session.setAttribute("user_gender", gender);
             session.setAttribute("user_phone_number", phoneNumber);
+            session.setAttribute("user_country", country);
+            session.setAttribute("user_courses", courses);
 
             writer.println("<p>Name: " + name + "</p>");
             writer.println("<p>Age: " + age + "</p>");
