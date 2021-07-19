@@ -7,39 +7,8 @@
         http://www.springframework.org/schema/context
         http://www.springframework.org/schema/context/spring-context.xsd">
 
+    <context:component-scan base-package="org.example" />
+
     <context:property-placeholder location="classpath:musicPlayer.properties" />
-
-    <bean id="musicBean1"
-          class="org.example.RockMusic"
-          factory-method="getMusic">
-        <!-- factory-method - указывает на метод создания объекта с использованием Фабрики
-             также по-умолчанию используется scope="singleton", но Фабрика при каждом обращении создаёт новый объект
-             и, несмотря на это, Spring обратится к фабричному методы лишь единожды
-             для соблюдения указанной конфигурации Singleton-->
-    </bean>
-    <bean id="musicBean2"
-          class="org.example.ClassicalMusic"
-          factory-method="getMusic">
-    </bean>
-
-    <bean id="musicPlayer"
-          class="org.example.MusicPlayer"
-          scope="prototype"
-          init-method="doMyInit"
-          destroy-method="doMyDestroy">
-        <!-- scope - по-умолчанию реализуется singleton
-             init-method - метод при инициализации бина
-             destroy-method - метод перед завершением Spring приложения
-             Важно! Для scope="prototype" не вызывается destroy-method -->
-        <property name="musicList">
-            <list>
-                <ref bean="musicBean1"/>
-                <ref bean="musicBean2"/>
-            </list>
-        </property>
-
-        <property name="name" value="${musicPlayer.name}"/>
-        <property name="volume" value="${musicPlayer.volume}"/>
-    </bean>
 
 </beans>

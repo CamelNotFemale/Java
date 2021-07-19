@@ -8,18 +8,14 @@ public class TestSpring {
         ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
 
         // Использование IoC (инверсия управления) с ручным созданием созависимости
-        //Music music = context.getBean("musicBean", Music.class);
-        //MusicPlayer player = new MusicPlayer(music);
+        Computer computer = context.getBean("computer", Computer.class);
+        Computer secondComputer = context.getBean("computer", Computer.class);
 
-        // Теперь используем DI - внедрение зависимостей
-        MusicPlayer firstPlayer = context.getBean("musicPlayer", MusicPlayer.class);
-        MusicPlayer secondPlayer = context.getBean("musicPlayer", MusicPlayer.class);
+        computer.openPlayer();
 
-        firstPlayer.playMusic();
-
-        firstPlayer.setVolume(20);
-        System.out.println("Volume of the player " + firstPlayer.getName() +": " + firstPlayer.getVolume());
-        System.out.println("Volume of the player " + secondPlayer.getName() +": " + secondPlayer.getVolume());
+        computer.player.setVolume(10);
+        System.out.println(computer.player.getName() + " " + computer.player.getVolume());
+        System.out.println(secondComputer.player.getName() + " " + secondComputer.player.getVolume());
 
         context.close();
     }
