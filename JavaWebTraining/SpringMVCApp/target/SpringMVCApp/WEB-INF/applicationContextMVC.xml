@@ -14,11 +14,13 @@
     <context:component-scan base-package="org.example"/>
 
     <mvc:annotation-driven/>
-
+    <!--
+        Конфигурация Spring приложения (бины, component scan, настройка Thymeleaf)
+    -->
     <bean id="templateResolver" class="org.thymeleaf.spring5.templateresolver.SpringResourceTemplateResolver">
         <property name="prefix" value="/WEB-INF/views/"/>
         <property name="suffix" value=".html"/>
-    </bean>
+    </bean> <!-- указание папки для всех наших отображений -->
 
     <bean id="templateEngine" class="org.thymeleaf.spring5.SpringTemplateEngine">
         <property name="templateResolver" ref="templateResolver"/>
