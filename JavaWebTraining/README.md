@@ -8,4 +8,4 @@
   - @Autowiring, @Qualifier, @Scope, @Value, @PostConstruct, @PreDestroy
 * __SpringMVCApp__ - ознакомление со Spring MVC
   - ...
-* * __CRUD__ - пробное CRUD приложение без обращения к Web'у
+* __CRUD__ - пробное CRUD приложение без обращения к Web'у
