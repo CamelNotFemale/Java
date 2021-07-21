@@ -1,11 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Goodbye</title>
 </head>
 <body>
 <h1>Goodbye!</h1>
+<p th:text="${message}" />
 <a href="/first/hello">Say hello</a> or <a href="/exit">Exit</a>
 </body>
 </html>

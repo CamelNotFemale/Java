@@ -2,11 +2,10 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>Goodbye</title>
+    <title>Calculator</title>
 </head>
 <body>
-<h1>Goodbye!</h1>
-<p th:text="${message}" />
-<a href="/first/hello">Say hello</a> or <a href="/exit">Exit</a>
+<h1><span th:text="${action}" /> result</h1>
+<p th:text="${result}" />
 </body>
 </html>
