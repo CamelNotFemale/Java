@@ -14,9 +14,9 @@ public class PersonDAO {
     { // блок инициализации "Базы данных" при создании
         people = new ArrayList<>();
 
-        people.add(new Person(PEOPLE_COUNT++, "Dmitriy", "Dementev", "check@mail.ru"));
-        people.add(new Person(PEOPLE_COUNT++, "Evgeniy", "Royzman", "drugs@gmail.ru"));
-        people.add(new Person(PEOPLE_COUNT++, "Viktor", "Pelevin", "utopi@mail.ru"));
+        people.add(new Person(PEOPLE_COUNT++, "Dmitriy", 20, "check@mail.ru"));
+        people.add(new Person(PEOPLE_COUNT++, "Evgeniy", 49, "drugs@gmail.ru"));
+        people.add(new Person(PEOPLE_COUNT++, "Viktor", 53, "utopi@mail.ru"));
     }
 
     public List<Person> index() {
@@ -36,7 +36,7 @@ public class PersonDAO {
         Person personToBeUpdated = show(id);
 
         personToBeUpdated.setName(updatedPerson.getName());
-        personToBeUpdated.setSurname(updatedPerson.getSurname());
+        personToBeUpdated.setAge(updatedPerson.getAge());
         personToBeUpdated.setEmail(updatedPerson.getEmail());
     }
 
