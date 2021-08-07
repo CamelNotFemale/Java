@@ -11,12 +11,12 @@ public class PersonDAO {
     private static int PEOPLE_COUNT = 0;
     private List<Person> people;
 
-    { // блок инициализации при создании
+    { // блок инициализации "Базы данных" при создании
         people = new ArrayList<>();
 
-        people.add(new Person(PEOPLE_COUNT++, "Dima"));
-        people.add(new Person(PEOPLE_COUNT++, "Katya"));
-        people.add(new Person(PEOPLE_COUNT++, "Kolya"));
+        people.add(new Person(PEOPLE_COUNT++, "Dmitriy", "Dementev", "check@mail.ru"));
+        people.add(new Person(PEOPLE_COUNT++, "Evgeniy", "Royzman", "drugs@gmail.ru"));
+        people.add(new Person(PEOPLE_COUNT++, "Viktor", "Pelevin", "utopi@mail.ru"));
     }
 
     public List<Person> index() {
@@ -25,5 +25,10 @@ public class PersonDAO {
 
     public Person show(int id) {
         return people.stream().filter(person -> person.getId() == id).findAny().orElse(null);
+    }
+
+    public void save(Person person) {
+        person.setId(PEOPLE_COUNT++);
+        people.add(person);
     }
 }
