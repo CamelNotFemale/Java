@@ -7,5 +7,12 @@
   - Внедрение зависимостей через XML/XML+Аннотации/Java Code конфигурацию
   - @Autowiring, @Qualifier, @Scope, @Value, @PostConstruct, @PreDestroy
 * __SpringMVCApp__ - ознакомление со Spring MVC
-  - ...
-* __CRUD__ - пробное CRUD приложение без обращения к Web'у
+  - Знакомство с MVC моделью
+  - Конфигурация через Java код
+  - Контроллеры. @Controller
+  - Параметры GET запроса. Аннотация @RequestParam
+  - Модель. Передача данных от Контроллера к Представлению.
+* __CRUD__ - приложение CRUD, REST с использованием паттерна DAO
+  - Аннотация @ModelAttribute. HTML Формы (Thymeleaf)
+  - Валидация форм. Аннотация @Valid (hibernate-validator)
+  - JDBC API. Базы данных (PostgreSQL)
