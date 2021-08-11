@@ -78,3 +78,17 @@
 #btn-del {
     background-color: #f10124;
 }
+
+.list-of-page {
+    background: #d4d4d4;
+    text-align: center;
+}
+
+.table-actions {
+    text-align: center; /*располагаем содержимое блока по центру*/
+    max-width: 60px;
+}
+.box {
+    display: inline-block; /*располагаем блоки в ряд по горизонтали*/
+    margin-right: 0.25em; /*отступ*/
+}

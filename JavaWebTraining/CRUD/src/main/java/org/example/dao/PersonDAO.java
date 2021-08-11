@@ -14,18 +14,24 @@ import java.util.List;
 public class PersonDAO {
 
     private final SessionFactory sessionFactory;
+    /** Количество отображаемых страниц из БД */
+    private int PAGE_COUNT = 10;
 
     @Autowired
     public PersonDAO(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
     }
-
     @Transactional(readOnly = true)
-    public List<Person> index() {
+    public int peopleCount() {
+        Session session = sessionFactory.getCurrentSession();
+        return session.createQuery("select count(p) from Person p", Number.class).getSingleResult().intValue();
+    }
+    @Transactional(readOnly = true)
+    public List<Person> index(int page) {
         Session session = sessionFactory.getCurrentSession();
 
         List<Person> resultList = session.createQuery("select p from Person p", Person.class)
-                .getResultList();
+                .setFirstResult(PAGE_COUNT * (page - 1)).setMaxResults(PAGE_COUNT).getResultList();
 
         resultList.sort(Comparator.comparing(Person::getId));
 

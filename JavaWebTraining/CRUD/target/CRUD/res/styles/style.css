@@ -71,30 +71,24 @@
     pointer-events: none;
 }
 
-.table-title h1:before {
-    content: "";
-    position: relative;
-    border: 10px solid transparent;
-    border-left: 10px solid rgb(81, 227, 213);
-    top: 23%;
-    margin: 0 auto;
-    left: 15%;
-}
-
-.table-title h1:after {
-    content: "";
-    position: relative;
-    border: 10px solid transparent;
-    border-right: 10px solid rgb(81, 227, 213);
-    top: 23%;
-    margin: 0 auto;
-    right: 15%;
-}
-
 #btn-edit {
     background-color: #0576cd;
 }
 
 #btn-del {
     background-color: #f10124;
+}
+
+.list-of-page {
+    background: #d4d4d4;
+    text-align: center;
+}
+
+.table-actions {
+    text-align: center; /*располагаем содержимое блока по центру*/
+    max-width: 60px;
+}
+.box {
+    display: inline-block; /*располагаем блоки в ряд по горизонтали*/
+    margin-right: 0.25em; /*отступ*/
 }

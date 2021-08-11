@@ -7,7 +7,8 @@
 </head>
 <body>
 
-<div class="table-title"> <h1>People</h1> </div>
+<h1>People</h1>
+
 <table class="table">
     <thead>
         <tr>
@@ -24,8 +25,17 @@
             <td th:text="${person.getName()}">VALUE</td>
             <td th:text="${person.getAge()}">VALUE</td>
             <td th:text="${person.getEmail()}">VALUE</td>
-            <td>
-                <a th:href="@{/people/{id}(id=${person.getId()})}">user page</a>
+            <td class="table-actions">
+                <form class="box" th:method="GET" th:action="@{/people/{id}(id=${person.getId()})}">
+                    <input type="submit" value="user page"/>
+                </form>
+                <form class="box" th:method="GET" th:action="@{/people/{id}/edit (id=${person.getId()})}">
+                    <input type="submit" value="edit"/>
+                </form>
+                <!-- По ссылке <a /> можно реализовывать только метод GET -->
+                <form class="box" th:method="DELETE" th:action="@{/people/{id}(id=${person.getId()})}">
+                    <input type="submit" value="delete"/>
+                </form>
             </td>
         </tr>
     </tbody>
@@ -36,7 +46,18 @@
     <a th:href="@{/people/{id}(id=${person.getId()})}"
        th:text="${person.getName() + ', ' + person.getAge()}">user</a>
 </div>-->
+
 <a class="btn" th:href="@{/people/new}">Create new person</a>
+
+<!-- !!! Переделать на обычный цикл for(если это возможно), в контроллере метод index() -->
+<footer class="list-of-page">
+    <span th:text="${peopleCount}+' records in total, pages'">PAGES TITLE</span>
+    <th:block th:each="item, iState : ${pagesCount}">
+        <th:block th:if="${page}==${iState.count}">[</th:block>
+        <a th:href="@{/people/?page={page}(page=${iState.count})}" th:text="${iState.count}">PAGE</a>
+        <th:block th:if="${page}==${iState.count}">]</th:block>
+    </th:block>
+</footer>
 
 </body>
 </html>

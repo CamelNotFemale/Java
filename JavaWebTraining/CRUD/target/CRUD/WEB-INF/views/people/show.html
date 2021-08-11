@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Person</title>
+    <link href="/res/styles/style.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 <p th:text="'Name: ' + ${person.getName()}" VALUE />
@@ -10,11 +11,11 @@
 <p th:text="'Email: ' + ${person.getEmail()}" VALUE />
 <p th:text="'ID: ' + ${person.getId()}" VALUE />
 
-<a th:href="@{/people/{id}/edit (id=${person.getId()})}">Edit</a>
+<a class="btn" id="btn-edit" th:href="@{/people/{id}/edit (id=${person.getId()})}">Edit</a>
 
 <!-- По ссылке <a /> можно реализовывать только метод GET -->
 <form th:method="DELETE" th:action="@{/people/{id}(id=${person.getId()})}">
-    <input type="submit" value="Delete"/>
+    <input class="btn" id="btn-del" type="submit" value="Delete"/>
 </form>
 </body>
 </html>

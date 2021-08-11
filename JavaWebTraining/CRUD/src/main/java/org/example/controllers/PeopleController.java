@@ -13,8 +13,10 @@ import javax.validation.Valid;
 @Controller
 @RequestMapping("/people")
 public class PeopleController {
-
+    /** ДАО для работы с данными класса Person */
     private final PersonDAO personDAO;
+    /** Текущая страница */
+    private int page;
 
     @Autowired
     public PeopleController(PersonDAO personDAO) {
@@ -22,9 +24,19 @@ public class PeopleController {
     }
 
     @GetMapping()
-    public String index(Model model) {
+    public String index(@RequestParam(name = "page", defaultValue = "1") int page, Model model) {
+        this.page = page; // устанавливаем новую текущую страницу
+
+        int peopleCount = personDAO.peopleCount();
+        int pagesCount = (peopleCount+9)/10;
+
         // получим всех людей из DAO и передадим их на отображение в представление
-        model.addAttribute("people", personDAO.index());
+        model.addAttribute("people", personDAO.index(page));
+        // передаем информацию для создания страниц в таблице
+        model.addAttribute("peopleCount", peopleCount);
+        model.addAttribute("page", page);
+        model.addAttribute("pagesCount", new int[pagesCount]);
+
         return "people/index";
     }
 
@@ -60,7 +72,7 @@ public class PeopleController {
 
         personDAO.save(person);
 
-        return "redirect:/people";
+        return "redirect:/people/?page=" + this.page;
     }
 
     @GetMapping("/{id}/edit")
@@ -78,13 +90,13 @@ public class PeopleController {
 
         personDAO.update(id, person);
 
-        return "redirect:/people";
+        return "redirect:/people/?page=" + this.page;
     }
 
     @DeleteMapping("/{id}")
     public String delete(@PathVariable("id") int id) {
         personDAO.delete(id);
 
-        return "redirect:/people";
+        return "redirect:/people/?page=" + this.page;
     }
 }
