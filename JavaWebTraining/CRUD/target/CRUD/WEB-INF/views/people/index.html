@@ -3,15 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <title>People</title>
+    <link href="/res/styles/style.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 
+<div class="table-title"> <h1>People</h1> </div>
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Age</th>
+            <th>E-mail</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr th:each="person : ${people}">
+            <td th:text="${person.getId()}">VALUE</td>
+            <td th:text="${person.getName()}">VALUE</td>
+            <td th:text="${person.getAge()}">VALUE</td>
+            <td th:text="${person.getEmail()}">VALUE</td>
+            <td>
+                <a th:href="@{/people/{id}(id=${person.getId()})}">user page</a>
+            </td>
+        </tr>
+    </tbody>
+
+</table>
+<!--
 <div th:each="person : ${people}">
     <a th:href="@{/people/{id}(id=${person.getId()})}"
        th:text="${person.getName() + ', ' + person.getAge()}">user</a>
-</div>
-<br />
-<a style="color: crimson" th:href="@{/people/new}">Create new person</a>
+</div>-->
+<a class="btn" th:href="@{/people/new}">Create new person</a>
 
 </body>
 </html>

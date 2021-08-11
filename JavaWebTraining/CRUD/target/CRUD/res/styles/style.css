@@ -1,0 +1,100 @@
+.table {
+    width: 100%;
+    border: none;
+    margin-bottom: 20px;
+}
+.table thead th {
+    font-weight: bold;
+    text-align: left;
+    border: none;
+    padding: 10px 15px;
+    background: #d8d8d8;
+    font-size: 14px;
+}
+.table thead tr th:first-child {
+    border-radius: 8px 0 0 8px;
+}
+.table thead tr th:last-child {
+    border-radius: 0 8px 8px 0;
+}
+.table tbody td {
+    text-align: left;
+    border: none;
+    padding: 10px 15px;
+    font-size: 14px;
+    vertical-align: top;
+}
+.table tbody tr:nth-child(even){
+    background: #f3f3f3;
+}
+.table tbody tr td:first-child {
+    border-radius: 8px 0 0 8px;
+}
+.table tbody tr td:last-child {
+    border-radius: 0 8px 8px 0;
+}
+
+.btn {
+    display: inline-block;
+    box-sizing: border-box;
+    padding: 0 24px;
+    margin: 0 15px 15px 0;
+    outline: none;
+    border: none;
+    border-radius: 3px;
+    height: 37px;
+    line-height: 37px;
+    font-size: 14px;
+    text-transform: uppercase;
+    font-weight: normal;
+    text-decoration: none;
+    color: #fff;
+    background-color: #05cd51;
+    cursor: pointer;
+    user-select: none;
+    appearance: none;
+    touch-action: manipulation;
+    transition: box-shadow .18s ease-out,background .18s ease-out,color .18s ease-out;
+}
+.btn:focus-visible {
+    box-shadow: 0 0 0 3px lightskyblue;
+}
+.btn:hover {
+    box-shadow: 0 1px 1px 0  #cfcfcf, 0 2px 5px 0  #cfcfcf;
+}
+.btn:active {
+    background-color: #058c38 !important;
+}
+.btn:disabled {
+    background-color: #aed2bc;
+    color: #444;
+    pointer-events: none;
+}
+
+.table-title h1:before {
+    content: "";
+    position: relative;
+    border: 10px solid transparent;
+    border-left: 10px solid rgb(81, 227, 213);
+    top: 23%;
+    margin: 0 auto;
+    left: 15%;
+}
+
+.table-title h1:after {
+    content: "";
+    position: relative;
+    border: 10px solid transparent;
+    border-right: 10px solid rgb(81, 227, 213);
+    top: 23%;
+    margin: 0 auto;
+    right: 15%;
+}
+
+#btn-edit {
+    background-color: #0576cd;
+}
+
+#btn-del {
+    background-color: #f10124;
+}

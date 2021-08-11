@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import org.example.models.Person;
 
+import java.util.Comparator;
 import java.util.List;
 
 @Component
@@ -23,8 +24,12 @@ public class PersonDAO {
     public List<Person> index() {
         Session session = sessionFactory.getCurrentSession();
 
-        return session.createQuery("select p from Person p", Person.class)
+        List<Person> resultList = session.createQuery("select p from Person p", Person.class)
                 .getResultList();
+
+        resultList.sort(Comparator.comparing(Person::getId));
+
+        return resultList;
     }
 
     @Transactional(readOnly = true)

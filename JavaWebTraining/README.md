@@ -15,4 +15,5 @@
 * __CRUD__ - приложение CRUD, REST с использованием паттерна DAO
   - Аннотация @ModelAttribute. HTML Формы (Thymeleaf)
   - Валидация форм. Аннотация @Valid (hibernate-validator)
-  - JDBC API. Базы данных (PostgreSQL)
+  - Базы данных (PostgreSQL).
+  - Варианты реализаций связи с БД через *JDBC API*, *JDBC Template(Spring)* и *Hibernate+SpringORM*. 
