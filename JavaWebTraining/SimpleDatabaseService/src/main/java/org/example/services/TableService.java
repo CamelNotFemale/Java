@@ -29,7 +29,7 @@ public class TableService {
     }
 
     //возвращает лист всех сущностей из базы
-    public List<String[]> getAll(){
+    public List<List<String>> getAll(){
         return tableRepository.findAll(); //реализовали метод внедренного бина
     }
 }

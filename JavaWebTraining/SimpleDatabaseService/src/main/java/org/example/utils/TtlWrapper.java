@@ -4,7 +4,7 @@ import java.util.Date;
 
 public class TtlWrapper<T> {
     /** ttl по-умолчанию - один час */
-    private static final long DEFAULT_TTL = 60*60;
+    private static final long DEFAULT_TTL = 1000*60*60;
     private T entity;
     private long timeToLife;
 

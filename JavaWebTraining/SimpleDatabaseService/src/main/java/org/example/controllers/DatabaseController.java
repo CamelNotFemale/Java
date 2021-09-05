@@ -21,18 +21,23 @@ public class DatabaseController {
     @GetMapping()
     public String index(Model model) {
         TableEntry entry1 = new TableEntry("10".getBytes());
-
         TableEntry entry2 = new TableEntry("20".getBytes());
-
         TableEntry entry3 = new TableEntry("30".getBytes());
 
         //с помощью переменной сервиса вызываем методы сохранения в базу, по разу для одного объекта
         tableService.save("key_1", entry1);
         tableService.save("key_2", entry2);
-        tableService.save("key_3", entry3);
+        tableService.save("key_3", entry3, 1000*30);
+        // передаем информацию для создания таблицы на странице
+        model.addAttribute("entries", tableService.getAll());
 
-        // передаем информацию для создания страниц в таблице
-        model.addAttribute("entry", tableService.get("key_2"));
+        return "index";
+    }
+
+    @GetMapping("/refresh")
+    public String refresh(Model model) {
+        // передаем информацию для создания таблицы на странице
+        model.addAttribute("entries", tableService.getAll());
 
         return "index";
     }

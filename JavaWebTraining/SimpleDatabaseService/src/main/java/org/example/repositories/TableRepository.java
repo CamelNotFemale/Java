@@ -4,10 +4,7 @@ import org.example.models.TableEntry;
 import org.example.utils.TtlWrapper;
 import org.springframework.stereotype.Repository;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 @Repository
 public class TableRepository {
@@ -44,17 +41,19 @@ public class TableRepository {
         return data.remove(key).getEntity();
     }
 
-    public List<String[]> findAll() {
-        List<String[]> res = new ArrayList<>();
+    public List<List<String>> findAll() {
+        List<List<String>> res = new ArrayList<>();
 
-        for(String key: data.keySet()) {
-            TtlWrapper<TableEntry> entryWithTtl = data.get(key);
+        Set<String> keySet = data.keySet();
+        String[] keys = keySet.toArray(new String[keySet.size()]);
+        for(String key: keys) {
             TableEntry entity = this.get(key);
             if (entity != null) {
-                String[] str = new String[3];
-                str[0] = key;
-                str[1] = entity.getValue().toString();
-                str[3] = String.valueOf(entryWithTtl.getTimeToLife());
+                TtlWrapper<TableEntry> entryWithTtl = data.get(key);
+                List<String> str = new ArrayList<>();
+                str.add(key);
+                str.add(entity.getValue());
+                str.add(new Date(entryWithTtl.getTimeToLife()).toString());
                 res.add(str);
             }
         }

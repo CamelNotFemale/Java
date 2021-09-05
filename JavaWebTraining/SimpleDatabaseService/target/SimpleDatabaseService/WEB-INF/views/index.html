@@ -3,17 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <title>Table</title>
-    <link href="/res/styles/style.css" rel="stylesheet" type="text/css"/>
+    <!--<link href="/res/styles/style.css" rel="stylesheet" type="text/css"/>-->
 </head>
 <body>
 
 <h1>Table</h1>
-<p th:text="${entry.getValue()}">ENTRY</p>
 <!--<div th:each="entry : ${entries}">
-    <p th:text="${entry.getKey() + ' = ' + entry.getValue()}">entry</p>
+    <div th:each="element : ${entry}">
+        <p th:text="${element.toString()}">element</p>
+    </div>
 </div>-->
+<table>
+    <thead>
+        <tr>
+            <th>key</th>
+            <th>value</th>
+            <th>time to life</th>
+        </tr>
+        </thead>
+    <tbody>
+        <tr th:each="entry : ${entries}">
+            <td th:each="element : ${entry}">
+            <th:block th:text="${element.toString()}">element</th:block>
+        </td>
+    </tr>
+    </tbody>
+</table>
 
-<!--<a class="btn" th:href="@{/people/new}">Create new person</a>-->
+<!--<a class="btn" th:href="@{/people/new}">Create new person</a>
+-->
 
 </body>
 </html>
