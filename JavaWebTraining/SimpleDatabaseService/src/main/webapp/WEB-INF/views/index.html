@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>People</title>
+    <link href="/res/styles/style.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+
+<h1>Table</h1>
+
+<div th:each="entry : ${entries}">
+    <p th:text="${entry.getKey() + ' = ' + entry.getValue()}">entry</p>
+</div>
+
+<!--<a class="btn" th:href="@{/people/new}">Create new person</a>-->
+
+</body>
+</html>
