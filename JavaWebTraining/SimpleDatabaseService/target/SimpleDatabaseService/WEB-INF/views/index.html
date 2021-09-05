@@ -2,16 +2,16 @@
 <html lang="en" xmlns:th="www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>People</title>
+    <title>Table</title>
     <link href="/res/styles/style.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 
 <h1>Table</h1>
-
-<div th:each="entry : ${entries}">
+<p th:text="${entry.getValue()}">ENTRY</p>
+<!--<div th:each="entry : ${entries}">
     <p th:text="${entry.getKey() + ' = ' + entry.getValue()}">entry</p>
-</div>
+</div>-->
 
 <!--<a class="btn" th:href="@{/people/new}">Create new person</a>-->
 

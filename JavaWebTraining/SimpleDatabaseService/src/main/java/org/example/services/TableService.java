@@ -16,13 +16,20 @@ public class TableService {
         this.tableRepository = tableRepository;
     }
 
-    //создали публичный метод (название любое может быть)
-    //на вход принимает сущность и сохраняет ее в базу
-    public void save(TableEntry entry){
-        tableRepository.save(entry); //реализовали метод внедренного бина
+    public void save(String key, TableEntry entry){
+        tableRepository.set(key, entry);
     }
+
+    public void save(String key, TableEntry entry, long ttl){
+        tableRepository.set(key, entry, ttl);
+    }
+
+    public TableEntry get(String key) {
+        return tableRepository.get(key);
+    }
+
     //возвращает лист всех сущностей из базы
-    public List<TableEntry> getAll(){
+    public List<String[]> getAll(){
         return tableRepository.findAll(); //реализовали метод внедренного бина
     }
 }

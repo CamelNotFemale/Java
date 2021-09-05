@@ -20,25 +20,19 @@ public class DatabaseController {
 
     @GetMapping()
     public String index(Model model) {
-        TableEntry entry1 = new TableEntry();
-        entry1.setKey("key1");
-        entry1.setValue("10".getBytes());
+        TableEntry entry1 = new TableEntry("10".getBytes());
 
-        TableEntry entry2 = new TableEntry();
-        entry2.setKey("key1");
-        entry2.setValue("20".getBytes());
+        TableEntry entry2 = new TableEntry("20".getBytes());
 
-        TableEntry entry3 = new TableEntry();
-        entry3.setKey("key1");
-        entry3.setValue("30".getBytes());
+        TableEntry entry3 = new TableEntry("30".getBytes());
 
         //с помощью переменной сервиса вызываем методы сохранения в базу, по разу для одного объекта
-        tableService.save(entry1);
-        tableService.save(entry2);
-        tableService.save(entry3);
+        tableService.save("key_1", entry1);
+        tableService.save("key_2", entry2);
+        tableService.save("key_3", entry3);
 
         // передаем информацию для создания страниц в таблице
-        model.addAttribute("entries", tableService.getAll());
+        model.addAttribute("entry", tableService.get("key_2"));
 
         return "index";
     }

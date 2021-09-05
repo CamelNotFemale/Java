@@ -23,6 +23,7 @@ import org.thymeleaf.spring5.templateresolver.SpringResourceTemplateResolver;
 import org.thymeleaf.spring5.view.ThymeleafViewResolver;
 
 import javax.sql.DataSource;
+import java.util.HashMap;
 import java.util.Properties;
 
 @Configuration
@@ -69,47 +70,5 @@ public class SpringConfig implements WebMvcConfigurer {
         ThymeleafViewResolver resolver = new ThymeleafViewResolver();
         resolver.setTemplateEngine(templateEngine());
         registry.viewResolver(resolver);
-    }
-
-    @Bean
-    public DataSource dataSource() {
-        DriverManagerDataSource dataSource = new DriverManagerDataSource();
-
-        dataSource.setDriverClassName("org.h2.Driver");
-        dataSource.setUrl("jdbc:h2:mem:test");
-        dataSource.setUsername("");
-        dataSource.setPassword("");
-
-        return dataSource;
-    }
-
-    private Properties hibernateProperties() {
-        Properties properties = new Properties();
-        properties.put("hibernate.dialect", "org.hibernate.dialect.H2Dialect");
-        properties.put("hibernate.show_sql", false);
-        properties.put("hibernate.ddl-auto", "create");
-
-        return properties;
-    }
-
-    @Bean
-    public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
-        final LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
-        em.setDataSource(dataSource());
-        em.setPackagesToScan("org.example.models");
-
-        final HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
-        em.setJpaVendorAdapter(vendorAdapter);
-        em.setJpaProperties(hibernateProperties());
-
-        return em;
-    }
-
-    @Bean
-    public PlatformTransactionManager transactionManager() {
-        JpaTransactionManager transactionManager = new JpaTransactionManager();
-        transactionManager.setEntityManagerFactory(entityManagerFactory().getObject());
-
-        return transactionManager;
     }
 }
