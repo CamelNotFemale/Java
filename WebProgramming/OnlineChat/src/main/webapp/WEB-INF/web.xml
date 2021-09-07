@@ -3,4 +3,27 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
          version="4.0">
+    
+    <welcome-file-list>
+        <welcome-file>PostsTitle.jsp</welcome-file>
+    </welcome-file-list>
+
+    <!--Изменение ссылки URL С "/PostsTitle.jsp" НА "/posts" -->
+    <servlet>
+        <servlet-name>PostsTitle</servlet-name>
+        <jsp-file>/PostsTitle.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>PostsTitle</servlet-name>
+        <url-pattern>/posts</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>PostForm</servlet-name>
+        <jsp-file>/post_form.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>PostForm</servlet-name>
+        <url-pattern>/new_post</url-pattern>
+    </servlet-mapping>
 </web-app>

@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.*;
 
-@WebServlet(name = "postsServlet", value = "/posts")
+@WebServlet(name = "postsServlet", value = "/posts1")
 /**
  * Servlet implementation class Posts
  */
@@ -72,6 +72,8 @@ public class Posts extends HttpServlet {
             }
             out.println("</table>");
             out.println("<br>");
+            out.println("<a href='/'><>");
+            out.println("<br>");
             // ссылки на возможные локализации
             out.println(LocaleManager.getString("msg.localeList") + ": ");
             out.println("<a href='/posts?lang=ru'>ru</a>");
@@ -109,7 +111,30 @@ public class Posts extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        processRequest(request, response);
+        response.setContentType("text/html");
+        PrintWriter writer = response.getWriter();
+
+        String name = request.getParameter("username");
+        String isAnonymous = request.getParameter("isAnonymous");
+        String comment = request.getParameter("comment");
+
+        try {
+            HttpSession session = request.getSession();
+            if (isAnonymous == "Yes") {
+                session.setAttribute("username", "Anonymous");
+            }
+            else {
+                session.setAttribute("username", name);
+            }
+            session.setAttribute("comment", comment);
+
+            writer.println("<p>Name: " + name + "</p>");
+            writer.println("<p>Comment: " + comment + "</p>");
+            writer.println("<br><br>");
+            writer.println("<button onclick=\"window.location.href = '/posts';\">All right!</button>");
+        } finally {
+            writer.close();
+        }
     }
 
     /**
