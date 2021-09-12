@@ -24,12 +24,14 @@
     String isAnonymous = request.getParameter("isAnonymous");
     String username = request.getParameter("username");
     String comment = request.getParameter("comment");
-    if(username != null) session.setAttribute("username", username);
-    if(comment != null) session.setAttribute("comment", comment);
-    if (isAnonymous != null && isAnonymous.equals("Yes")) {
-        if (comment.length() > 30)
-            throw new IllegalArgumentException("Anonymous posts cannot exceed 30 characters");
-        session.setAttribute("username", "Anonimous");
+    if (username != null && comment != null) {
+        System.out.println(username+" "+comment);
+        if (isAnonymous.equals("Yes")) {
+            if (comment.length() > 30)
+                throw new IllegalArgumentException("Anonymous posts cannot exceed 30 characters");
+            username = "Anonimous";
+        }
+        Storage.save(username, comment);
     }
 %>
 <h1><%=LocaleManager.getString("header")%></h1>
@@ -38,8 +40,12 @@
 <br>
 <%-- добавление нового поста --%>
 <a href='/new_post'><%= LocaleManager.getString("btn.newPost")%><a>
-
 <br>
+
+<%-- поиск всех оставленных пользователем комментариев --%>
+<a href='/search'>Поиск сообщений пользователя<a>
+<br>
+
 <%-- ссылки на возможные локализации --%>
 <span><%= LocaleManager.getString("msg.localeList") + ": " %></span>
 <a href='/posts?lang=ru'>ru</a>

@@ -27,6 +27,24 @@
         <url-pattern>/new_post</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>SearchForm</servlet-name>
+        <jsp-file>/search_form.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>SearchForm</servlet-name>
+        <url-pattern>/search</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>SearchResult</servlet-name>
+        <jsp-file>/AskUserName.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>SearchResult</servlet-name>
+        <url-pattern>/search_result</url-pattern>
+    </servlet-mapping>
+
     <!-- Добавление авторизации пользователей -->
     <security-role>
         <role-name>admin</role-name>
