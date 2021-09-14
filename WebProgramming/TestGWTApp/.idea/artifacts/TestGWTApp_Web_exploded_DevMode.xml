@@ -1,0 +1,16 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="TestGWTApp:Web exploded DevMode">
+    <output-path>$PROJECT_DIR$/out/artifacts/TestGWTApp_Web_exploded_DevMode</output-path>
+    <root id="root">
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="TestGWTApp" />
+        </element>
+        <element id="directory" name="lib">
+          <element id="file-copy" path="$PROJECT_DIR$/../../../../../gwt-2.9.0/gwt-servlet.jar" />
+        </element>
+      </element>
+      <element id="javaee-facet-resources" facet="TestGWTApp/web/Web" />
+    </root>
+  </artifact>
+</component>
