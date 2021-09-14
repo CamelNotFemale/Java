@@ -5,9 +5,9 @@ import com.mySampleApplication.client.MySampleApplicationService;
 import com.mySampleApplication.client.Post;
 
 import java.util.*;
-
+/** Реализация логики сервера - некий сервлет */
 public class MySampleApplicationServiceImpl extends RemoteServiceServlet implements MySampleApplicationService {
-    // Implementation of sample interface method
+
     private static List<Post> db = null;
     static {
         db = new ArrayList<>();

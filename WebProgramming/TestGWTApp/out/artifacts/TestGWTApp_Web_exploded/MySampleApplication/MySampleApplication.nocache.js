@@ -1,5 +1,5 @@
 function MySampleApplication(){
-  var $intern_0 = 'bootstrap', $intern_1 = 'begin', $intern_2 = 'gwt.codesvr.MySampleApplication=', $intern_3 = 'gwt.codesvr=', $intern_4 = 'MySampleApplication', $intern_5 = 'startup', $intern_6 = 'DUMMY', $intern_7 = 0, $intern_8 = 1, $intern_9 = 'iframe', $intern_10 = 'position:absolute; width:0; height:0; border:none; left: -1000px;', $intern_11 = ' top: -1000px;', $intern_12 = 'CSS1Compat', $intern_13 = '<!doctype html>', $intern_14 = '', $intern_15 = '<html><head><\/head><body><\/body><\/html>', $intern_16 = 'undefined', $intern_17 = 'readystatechange', $intern_18 = 10, $intern_19 = 'script', $intern_20 = 'javascript', $intern_21 = 'Failed to load ', $intern_22 = 'moduleStartup', $intern_23 = 'scriptTagAdded', $intern_24 = 'moduleRequested', $intern_25 = 'meta', $intern_26 = 'name', $intern_27 = 'MySampleApplication::', $intern_28 = '::', $intern_29 = 'gwt:property', $intern_30 = 'content', $intern_31 = '=', $intern_32 = 'gwt:onPropertyErrorFn', $intern_33 = 'Bad handler "', $intern_34 = '" for "gwt:onPropertyErrorFn"', $intern_35 = 'gwt:onLoadErrorFn', $intern_36 = '" for "gwt:onLoadErrorFn"', $intern_37 = '#', $intern_38 = '?', $intern_39 = '/', $intern_40 = 'img', $intern_41 = 'clear.cache.gif', $intern_42 = 'baseUrl', $intern_43 = 'MySampleApplication.nocache.js', $intern_44 = 'base', $intern_45 = '//', $intern_46 = 'user.agent', $intern_47 = 'webkit', $intern_48 = 'safari', $intern_49 = 'msie', $intern_50 = 11, $intern_51 = 'ie10', $intern_52 = 9, $intern_53 = 'ie9', $intern_54 = 8, $intern_55 = 'ie8', $intern_56 = 'gecko', $intern_57 = 'gecko1_8', $intern_58 = 2, $intern_59 = 3, $intern_60 = 4, $intern_61 = 'selectingPermutation', $intern_62 = 'MySampleApplication.devmode.js', $intern_63 = '5A4E3A5AC38C11929DAC37077BBB0B5D', $intern_64 = '7705705608B808D12BCFF5F74464AA7E', $intern_65 = '79D1AD2BA64BE14FDB04F4CF9E217E22', $intern_66 = '88A7D9A00B8854910070F09883C8561B', $intern_67 = 'EDF1AA2B80A149F2BFFF471468A36759', $intern_68 = ':', $intern_69 = '.cache.js', $intern_70 = 'loadExternalRefs', $intern_71 = 'end', $intern_72 = 'http:', $intern_73 = 'file:', $intern_74 = '_gwt_dummy_', $intern_75 = '__gwtDevModeHook:MySampleApplication', $intern_76 = 'Ignoring non-whitelisted Dev Mode URL: ', $intern_77 = ':moduleBase', $intern_78 = 'head';
+  var $intern_0 = 'bootstrap', $intern_1 = 'begin', $intern_2 = 'gwt.codesvr.MySampleApplication=', $intern_3 = 'gwt.codesvr=', $intern_4 = 'MySampleApplication', $intern_5 = 'startup', $intern_6 = 'DUMMY', $intern_7 = 0, $intern_8 = 1, $intern_9 = 'iframe', $intern_10 = 'position:absolute; width:0; height:0; border:none; left: -1000px;', $intern_11 = ' top: -1000px;', $intern_12 = 'CSS1Compat', $intern_13 = '<!doctype html>', $intern_14 = '', $intern_15 = '<html><head><\/head><body><\/body><\/html>', $intern_16 = 'undefined', $intern_17 = 'readystatechange', $intern_18 = 10, $intern_19 = 'script', $intern_20 = 'javascript', $intern_21 = 'Failed to load ', $intern_22 = 'moduleStartup', $intern_23 = 'scriptTagAdded', $intern_24 = 'moduleRequested', $intern_25 = 'meta', $intern_26 = 'name', $intern_27 = 'MySampleApplication::', $intern_28 = '::', $intern_29 = 'gwt:property', $intern_30 = 'content', $intern_31 = '=', $intern_32 = 'gwt:onPropertyErrorFn', $intern_33 = 'Bad handler "', $intern_34 = '" for "gwt:onPropertyErrorFn"', $intern_35 = 'gwt:onLoadErrorFn', $intern_36 = '" for "gwt:onLoadErrorFn"', $intern_37 = '#', $intern_38 = '?', $intern_39 = '/', $intern_40 = 'img', $intern_41 = 'clear.cache.gif', $intern_42 = 'baseUrl', $intern_43 = 'MySampleApplication.nocache.js', $intern_44 = 'base', $intern_45 = '//', $intern_46 = 'locale', $intern_47 = 'default', $intern_48 = 'locale=', $intern_49 = 7, $intern_50 = '&', $intern_51 = '__gwt_Locale', $intern_52 = '_', $intern_53 = 'Unexpected exception in locale detection, using default: ', $intern_54 = 2, $intern_55 = 'user.agent', $intern_56 = 'webkit', $intern_57 = 'safari', $intern_58 = 'msie', $intern_59 = 11, $intern_60 = 'ie10', $intern_61 = 9, $intern_62 = 'ie9', $intern_63 = 8, $intern_64 = 'ie8', $intern_65 = 'gecko', $intern_66 = 'gecko1_8', $intern_67 = 3, $intern_68 = 4, $intern_69 = 'selectingPermutation', $intern_70 = 'MySampleApplication.devmode.js', $intern_71 = 'en', $intern_72 = '0F0A12308305FEC7A81415A4FDDA784D', $intern_73 = '13900B238CC8704F0A3D87119EB850A2', $intern_74 = '3AEBB079FA0729F28B2D369E7BAEDA6A', $intern_75 = '470B80247BAF73CE3BAE8742CE833475', $intern_76 = 'ru', $intern_77 = '474F269CC72B8482C418C0ECBAD73A01', $intern_78 = '48FD2A4DC275C309C4564BED2758E6C1', $intern_79 = '64A28C2E536B7D2E61BCCBBFF47CD5F3', $intern_80 = '65DBD70D8485B20C0214F2452A8CDCE7', $intern_81 = '70043A81C55979471EB3B77069AD0A94', $intern_82 = '999CCA01BF7EDDCE833C9546336039EF', $intern_83 = 'A150B83EC0BC281433CEFFC268659C03', $intern_84 = 'B7A73A9B310F1EEB16ACAA3C12EB8201', $intern_85 = 'D08E7DD3954159428060B1DD3898300B', $intern_86 = 'ED92B5B500471C81E5C256891ECF3001', $intern_87 = 'FA00EDD24769C78AB54874929A3D2229', $intern_88 = ':', $intern_89 = '.cache.js', $intern_90 = 'loadExternalRefs', $intern_91 = 'end', $intern_92 = 'http:', $intern_93 = 'file:', $intern_94 = '_gwt_dummy_', $intern_95 = '__gwtDevModeHook:MySampleApplication', $intern_96 = 'Ignoring non-whitelisted Dev Mode URL: ', $intern_97 = ':moduleBase', $intern_98 = 'head';
   var $wnd = window;
   var $doc = document;
   sendStats($intern_0, $intern_1);
@@ -319,37 +319,79 @@ function MySampleApplication(){
     }
 
     providers[$intern_46] = function(){
+      var locale = null;
+      var rtlocale = $intern_47;
+      try {
+        if (!locale) {
+          var queryParam = location.search;
+          var qpStart = queryParam.indexOf($intern_48);
+          if (qpStart >= $intern_7) {
+            var value_0 = queryParam.substring(qpStart + $intern_49);
+            var end = queryParam.indexOf($intern_50, qpStart);
+            if (end < $intern_7) {
+              end = queryParam.length;
+            }
+            locale = queryParam.substring(qpStart + $intern_49, end);
+          }
+        }
+        if (!locale) {
+          locale = __gwt_getMetaProperty($intern_46);
+        }
+        if (!locale) {
+          locale = $wnd[$intern_51];
+        }
+        if (locale) {
+          rtlocale = locale;
+        }
+        while (locale && !__gwt_isKnownPropertyValue($intern_46, locale)) {
+          var lastIndex = locale.lastIndexOf($intern_52);
+          if (lastIndex < $intern_7) {
+            locale = null;
+            break;
+          }
+          locale = locale.substring($intern_7, lastIndex);
+        }
+      }
+       catch (e) {
+        alert($intern_53 + e);
+      }
+      $wnd[$intern_51] = rtlocale;
+      return locale || $intern_47;
+    }
+    ;
+    values[$intern_46] = {'default':$intern_7, 'en':$intern_8, 'ru':$intern_54};
+    providers[$intern_55] = function(){
       var ua = navigator.userAgent.toLowerCase();
       var docMode = $doc.documentMode;
       if (function(){
-        return ua.indexOf($intern_47) != -1;
-      }
-      ())
-        return $intern_48;
-      if (function(){
-        return ua.indexOf($intern_49) != -1 && (docMode >= $intern_18 && docMode < $intern_50);
-      }
-      ())
-        return $intern_51;
-      if (function(){
-        return ua.indexOf($intern_49) != -1 && (docMode >= $intern_52 && docMode < $intern_50);
-      }
-      ())
-        return $intern_53;
-      if (function(){
-        return ua.indexOf($intern_49) != -1 && (docMode >= $intern_54 && docMode < $intern_50);
-      }
-      ())
-        return $intern_55;
-      if (function(){
-        return ua.indexOf($intern_56) != -1 || docMode >= $intern_50;
+        return ua.indexOf($intern_56) != -1;
       }
       ())
         return $intern_57;
+      if (function(){
+        return ua.indexOf($intern_58) != -1 && (docMode >= $intern_18 && docMode < $intern_59);
+      }
+      ())
+        return $intern_60;
+      if (function(){
+        return ua.indexOf($intern_58) != -1 && (docMode >= $intern_61 && docMode < $intern_59);
+      }
+      ())
+        return $intern_62;
+      if (function(){
+        return ua.indexOf($intern_58) != -1 && (docMode >= $intern_63 && docMode < $intern_59);
+      }
+      ())
+        return $intern_64;
+      if (function(){
+        return ua.indexOf($intern_65) != -1 || docMode >= $intern_59;
+      }
+      ())
+        return $intern_66;
       return $intern_14;
     }
     ;
-    values[$intern_46] = {'gecko1_8':$intern_7, 'ie10':$intern_8, 'ie8':$intern_58, 'ie9':$intern_59, 'safari':$intern_60};
+    values[$intern_55] = {'gecko1_8':$intern_7, 'ie10':$intern_8, 'ie8':$intern_54, 'ie9':$intern_67, 'safari':$intern_68};
     __gwt_isKnownPropertyValue = function(propName, propValue){
       return propValue in values[propName];
     }
@@ -366,19 +408,29 @@ function MySampleApplication(){
     ;
     MySampleApplication.__computePropValue = computePropValue;
     $wnd.__gwt_activeModules[$intern_4].bindings = MySampleApplication.__getPropMap;
-    sendStats($intern_0, $intern_61);
+    sendStats($intern_0, $intern_69);
     if (isHostedMode()) {
-      return computeUrlForResource($intern_62);
+      return computeUrlForResource($intern_70);
     }
     var strongName;
     try {
-      unflattenKeylistIntoAnswers([$intern_53], $intern_63);
-      unflattenKeylistIntoAnswers([$intern_48], $intern_64);
-      unflattenKeylistIntoAnswers([$intern_55], $intern_65);
-      unflattenKeylistIntoAnswers([$intern_57], $intern_66);
-      unflattenKeylistIntoAnswers([$intern_51], $intern_67);
-      strongName = answers[computePropValue($intern_46)];
-      var idx = strongName.indexOf($intern_68);
+      unflattenKeylistIntoAnswers([$intern_71, $intern_57], $intern_72);
+      unflattenKeylistIntoAnswers([$intern_71, $intern_62], $intern_73);
+      unflattenKeylistIntoAnswers([$intern_47, $intern_60], $intern_74);
+      unflattenKeylistIntoAnswers([$intern_71, $intern_66], $intern_75);
+      unflattenKeylistIntoAnswers([$intern_76, $intern_62], $intern_77);
+      unflattenKeylistIntoAnswers([$intern_76, $intern_57], $intern_78);
+      unflattenKeylistIntoAnswers([$intern_76, $intern_64], $intern_79);
+      unflattenKeylistIntoAnswers([$intern_47, $intern_62], $intern_80);
+      unflattenKeylistIntoAnswers([$intern_47, $intern_64], $intern_81);
+      unflattenKeylistIntoAnswers([$intern_47, $intern_57], $intern_82);
+      unflattenKeylistIntoAnswers([$intern_76, $intern_66], $intern_83);
+      unflattenKeylistIntoAnswers([$intern_71, $intern_64], $intern_84);
+      unflattenKeylistIntoAnswers([$intern_47, $intern_66], $intern_85);
+      unflattenKeylistIntoAnswers([$intern_76, $intern_60], $intern_86);
+      unflattenKeylistIntoAnswers([$intern_71, $intern_60], $intern_87);
+      strongName = answers[computePropValue($intern_46)][computePropValue($intern_55)];
+      var idx = strongName.indexOf($intern_88);
       if (idx != -1) {
         softPermutationId = parseInt(strongName.substring(idx + $intern_8), $intern_18);
         strongName = strongName.substring($intern_7, idx);
@@ -387,15 +439,15 @@ function MySampleApplication(){
      catch (e) {
     }
     MySampleApplication.__softPermutationId = softPermutationId;
-    return computeUrlForResource(strongName + $intern_69);
+    return computeUrlForResource(strongName + $intern_89);
   }
 
   function loadExternalStylesheets(){
     if (!$wnd.__gwt_stylesLoaded) {
       $wnd.__gwt_stylesLoaded = {};
     }
-    sendStats($intern_70, $intern_1);
-    sendStats($intern_70, $intern_71);
+    sendStats($intern_90, $intern_1);
+    sendStats($intern_90, $intern_91);
   }
 
   processMetas();
@@ -403,10 +455,10 @@ function MySampleApplication(){
   activeModules[$intern_4].moduleBase = MySampleApplication.__moduleBase;
   var filename = getCompiledCodeFilename();
   if ($wnd) {
-    var devModePermitted = !!($wnd.location.protocol == $intern_72 || $wnd.location.protocol == $intern_73);
+    var devModePermitted = !!($wnd.location.protocol == $intern_92 || $wnd.location.protocol == $intern_93);
     $wnd.__gwt_activeModules[$intern_4].canRedirect = devModePermitted;
     function supportsSessionStorage(){
-      var key = $intern_74;
+      var key = $intern_94;
       try {
         $wnd.sessionStorage.setItem(key, key);
         $wnd.sessionStorage.removeItem(key);
@@ -418,27 +470,27 @@ function MySampleApplication(){
     }
 
     if (devModePermitted && supportsSessionStorage()) {
-      var devModeKey = $intern_75;
+      var devModeKey = $intern_95;
       var devModeUrl = $wnd.sessionStorage[devModeKey];
       if (!/^http:\/\/(localhost|127\.0\.0\.1)(:\d+)?\/.*$/.test(devModeUrl)) {
         if (devModeUrl && (window.console && console.log)) {
-          console.log($intern_76 + devModeUrl);
+          console.log($intern_96 + devModeUrl);
         }
         devModeUrl = $intern_14;
       }
       if (devModeUrl && !$wnd[devModeKey]) {
         $wnd[devModeKey] = true;
-        $wnd[devModeKey + $intern_77] = computeScriptBase();
+        $wnd[devModeKey + $intern_97] = computeScriptBase();
         var devModeScript = $doc.createElement($intern_19);
         devModeScript.src = devModeUrl;
-        var head = $doc.getElementsByTagName($intern_78)[$intern_7];
+        var head = $doc.getElementsByTagName($intern_98)[$intern_7];
         head.insertBefore(devModeScript, head.firstElementChild || head.children[$intern_7]);
         return false;
       }
     }
   }
   loadExternalStylesheets();
-  sendStats($intern_0, $intern_71);
+  sendStats($intern_0, $intern_91);
   installScript(filename);
   return true;
 }
