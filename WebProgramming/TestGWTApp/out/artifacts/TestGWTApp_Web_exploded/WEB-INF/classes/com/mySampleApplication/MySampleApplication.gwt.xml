@@ -2,6 +2,7 @@
         "http://www.gwtproject.org/doctype/2.8.0/gwt-module.dtd">
 
 <module rename-to="MySampleApplication">
+    <!-- подключения локализаций для интернационализации -->
     <inherits name="com.google.gwt.i18n.I18N"/>
     <extend-property name="locale" values="ru"/>
     <extend-property name="locale" values="en"/>
