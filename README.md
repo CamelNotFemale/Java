@@ -13,3 +13,5 @@
     - Многопоточность
 * __JavaWebTraining__ - Тренировочные Web-приложения на Java (подробное описание в каталоге)
 * __Patterns__ - учебная практика по шаблонам проектирования
+* __WebProgramming__ - лабораторные работы по Web-программированию за 5 семестр
+    - Java Servlets, JSP, Apache Tomcat, Google Web Toolkit, авторизация по SSL 
