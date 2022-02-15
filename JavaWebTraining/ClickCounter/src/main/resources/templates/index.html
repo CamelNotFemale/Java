@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Main page</title>
+</head>
+<body>
+<form action= "/save" method= "POST" >
+    <button type="submit">Кликай</button>
+</form>
+<p>Ты накликал <th:block th:text="${click.getCount()}" /> раз</p>
+</body>
+</html>
