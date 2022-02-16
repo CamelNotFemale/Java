@@ -2,12 +2,15 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Main page</title>
+    <title>Click counter</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<form action= "/save" method= "POST" >
-    <button type="submit">Кликай</button>
-</form>
-<p>Ты накликал <th:block th:text="${click.getCount()}" /> раз</p>
+<div class="center">
+    <form action= "/" method= "POST" >
+        <button type="submit">Кликай</button>
+    </form>
+    <p>Ты накликал <th:block th:text="${click.getCount()}" /> раз</p>
+</div>
 </body>
 </html>
