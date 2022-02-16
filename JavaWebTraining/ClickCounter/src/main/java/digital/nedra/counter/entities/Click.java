@@ -10,7 +10,6 @@ public class Click {
 
     private int count;
     @Id
-    @GeneratedValue
     private int id;
 
     public Click() {

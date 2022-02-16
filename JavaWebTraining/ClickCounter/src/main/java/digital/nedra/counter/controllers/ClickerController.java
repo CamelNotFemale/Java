@@ -23,6 +23,7 @@ public class ClickerController {
         Click click = null;
         if (clicks.isEmpty()) {
             click = new Click();
+            click.setId(1);
             click.setCount(0);
             clickerRepository.save(click);
         }
