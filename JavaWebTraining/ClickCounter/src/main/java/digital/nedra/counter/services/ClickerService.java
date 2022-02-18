@@ -29,12 +29,16 @@ public class ClickerService {
             return click;
         }
 
-        @Transactional(isolation = Isolation.REPEATABLE_READ)
+        @Transactional
         public Click increment() {
-            Click click = clickerRepository.findById(1).get();
-            click.setCount(click.getCount()+1);
-            clickerRepository.save(click);
+            //Click click = clickerRepository.findById(1).get();
+            Click click = clickerRepository.findClickForUpdate(1).get();
 
-            return click;
+            Click update = new Click();
+            update.setId(1);
+            update.setCount(click.getCount()+1);
+            clickerRepository.save(update);
+
+            return update;
         }
 }
