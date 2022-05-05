@@ -15,3 +15,4 @@
 * __Patterns__ - учебная практика по шаблонам проектирования
 * __WebProgramming__ - лабораторные работы по Web-программированию за 5 семестр
     - Java Servlets, JSP, Apache Tomcat, Google Web Toolkit, авторизация по SSL 
+* __WeatherAnalysis__ - консольное приложение-анализатор погоды с сайта rp5.ru  

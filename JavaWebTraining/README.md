@@ -12,8 +12,10 @@
   - Контроллеры. @Controller
   - Параметры GET запроса. Аннотация @RequestParam
   - Модель. Передача данных от Контроллера к Представлению.
-* __CRUD__ - приложение CRUD, REST с использованием паттерна DAO
+* __CRUD__ - веб-приложение CRUD, REST с использованием паттерна DAO
   - Аннотация @ModelAttribute. HTML Формы (Thymeleaf)
   - Валидация форм. Аннотация @Valid (hibernate-validator)
-  - Базы данных (PostgreSQL).
-  - Варианты реализаций связи с БД через *JDBC API*, *JDBC Template(Spring)* и *Hibernate+SpringORM*. 
+  - Базы данных (PostgreSQL)
+  - Варианты реализаций связи с БД через *JDBC API*, *JDBC Template(Spring)* и *Hibernate+SpringORM*
+  - Стилизация HTML кода через ResourceHandlerRegistry(Spring) на CSS  
+* __ClickCounter__ - веб-приложение "Счетчик кликов"
